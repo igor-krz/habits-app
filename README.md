@@ -1,1 +1,3 @@
 # habit-app
+
+`npm install`
