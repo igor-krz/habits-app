@@ -18,8 +18,14 @@ class LoginPage extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.loadFunction(this.state);
   };
+
+  componentDidMount() {
+    fetch('api/harrypotter')
+    .then(response => response.json())
+    .then(result => console.log(result))
+  }
+
   render() {
     return (
       <div className="container-fluid" id="HomePage">

@@ -26,14 +26,33 @@ class RegisterPage extends Component {
   };
 
   handleSubmit = (e) => {
-    e.preventDefault();
+    
     console.log(this.state.name);
     console.log(this.state.surname);
     console.log(this.state.username);
     console.log(this.state.password);
 
+    const data = {
+      name: this.state.name,
+      surname: this.state.surname,
+      username: this.state.username
+    }
+
+    fetch('api/habits', {
+      method:"POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .catch((error) => {
+      console.log('Error:', error)
+    });
+  
+    e.preventDefault();
     // this.props.loadFunction(this.state);
   };
+
   render() {
     return (
       <div className="container-fluid" id="HomePage">
