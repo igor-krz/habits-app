@@ -6,7 +6,8 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Navigation from "./Components/Navigation";
 
 //containers
-import HomePage from "./Containers/HomePage";
+import RegisterPage from "./Containers/RegisterPage";
+import LoginPage from "./Containers/LoginPage";
 
 class App extends React.Component {
   render() {
@@ -16,7 +17,10 @@ class App extends React.Component {
           <Navigation />
           <Switch>
             <Route exact path="/">
-              <HomePage />
+              <LoginPage />
+            </Route>
+            <Route exact path="/register">
+              <RegisterPage />
             </Route>
           </Switch>
         </Router>
