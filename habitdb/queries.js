@@ -6,6 +6,18 @@ function Users(){
     return knex('userTable')
 }
 
+function Habits() {
+    return knex('habitTable') 
+}
+
+function getUserHabits(userid) {
+    return Habits().where('userId', (userid));
+}
+
+function addHabit(habit) {
+    return Habits().insert(habit, 'userId');
+}
+
 const hashPassword = (password) => {
  return new Promise((resolve, reject) => {
     bcrypt.hash(password, 10, (err, hash) => {
@@ -53,6 +65,7 @@ function remove(username) {
     return Users().where('username', (username)).del();
 }
 
+
 module.exports = {
     getSingle: getSingle,
     add: add,
@@ -61,5 +74,7 @@ module.exports = {
     hashPassword: hashPassword,
     createToken:createToken,
     checkPassword:checkPassword,
-    updateUserToken:updateUserToken
+    updateUserToken:updateUserToken,
+    getUserHabits:getUserHabits,
+    addHabit:addHabit
 }
