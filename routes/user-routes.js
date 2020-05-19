@@ -12,6 +12,42 @@ router.get('/:username', (req, res) => {
     });
 });
 
+router.post('/signup', (req, res, next) => {
+    const user = req.body
+    Users.hashPassword(user.password_digest)
+        .then((hashedPassword)=> {
+            delete user.password
+            user.password_digest = hashedPassword
+        })
+        .then(() => Users.createToken())
+        .then(token => user.token = token)
+        .then(()=> Users.add(user))
+        .then(user => {
+            delete user.password_digest
+            res.status(201).json({user})
+        })
+        .catch((err) => console.error(err))
+
+})
+
+router.post('/signin', (req, res, next) => {
+    const userReq = req.body
+    let user;
+    Users.getSingle(userReq.username)
+    .then(foundUser => {
+        user = foundUser
+        return Users.checkPassword(userReq.password_digest, foundUser)
+    })
+    .then((res) => Users.createToken())
+    .then(token => Users.updateUserToken(token,user.username))
+    .then(() => {
+        delete user.password_digest
+        res.status(200).json(user)
+        console.log(users)
+    })
+    .catch((err) => console.error(err))
+})
+
 router.post('/habits', (req, res, next) => {
     Users.add(req.body)
     .then(function(userID) {

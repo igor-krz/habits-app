@@ -16,15 +16,35 @@ class LoginPage extends Component {
   handleUsername = (e) => {
     this.setState({ username: e.target.value });
   };
+ 
   handleSubmit = (e) => {
+    
+
+    const data = {
+      username: this.state.username,
+      password_digest: this.state.password
+    }
+
+    fetch('api/signin', {
+      method:"POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+     .then(data => {
+          console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.log('Error:', error)
+    });
+  
     e.preventDefault();
+    // this.props.loadFunction(this.state);
   };
 
-  componentDidMount() {
-    fetch('api/harrypotter')
-    .then(response => response.json())
-    .then(result => console.log(result))
-  }
+
 
   render() {
     return (

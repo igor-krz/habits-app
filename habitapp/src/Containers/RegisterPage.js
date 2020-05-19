@@ -35,10 +35,11 @@ class RegisterPage extends Component {
     const data = {
       name: this.state.name,
       surname: this.state.surname,
-      username: this.state.username
+      username: this.state.username,
+      password_digest: this.state.password
     }
 
-    fetch('api/habits', {
+    fetch('api/signup', {
       method:"POST",
       headers: {
         'Content-Type': 'application/json'
