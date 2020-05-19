@@ -7,6 +7,7 @@ class LoginPage extends Component {
     this.state = {
       username: "",
       password: "",
+      data: [],
       toDashboard: false,
     };
   }
@@ -19,7 +20,6 @@ class LoginPage extends Component {
   };
 
   handleSubmit = (e) => {
-    this.setState({ toDashboard: true });
     const data = {
       username: this.state.username,
       password_digest: this.state.password,
@@ -34,7 +34,8 @@ class LoginPage extends Component {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
+        // console.log("Success:", data);
+        this.setState({ data: data, toDashboard: true });
       })
       .catch((error) => {
         console.log("Error:", error);
@@ -46,7 +47,14 @@ class LoginPage extends Component {
 
   render() {
     if (this.state.toDashboard === true) {
-      return <Redirect to="/dashboard" />;
+      return (
+        <Redirect
+          to={{
+            pathname: "/dashboard",
+            state: { data: this.state.data },
+          }}
+        />
+      );
     }
     return (
       <div className="container-fluid" id="HomePage">

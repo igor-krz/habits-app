@@ -17,15 +17,11 @@ class App extends React.Component {
         <Router>
           <Navigation />
           <Switch>
-            <Route exact path="/">
-              <LoginPage />
-            </Route>
-            <Route exact path="/register">
-              <RegisterPage />
-            </Route>
-            <Route exact path="/dashboard">
-              <Dashboard />
-            </Route>
+            <Route exact path="/" component={LoginPage} />
+
+            <Route exact path="/register" component={RegisterPage} />
+
+            <Route exact path="/dashboard" component={Dashboard} />
           </Switch>
         </Router>
       </div>

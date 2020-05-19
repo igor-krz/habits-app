@@ -21,13 +21,28 @@ export class NewHabit extends Component {
     this.setState({ frequency: e.target.value });
   };
 
-  componentWillMount(e) {
-    this.handleSubmit(e);
-  }
+  //   componentWillMount(e) {
+  //     this.handleSubmit(e);
+  //   }
   handleSubmit = (e) => {
-    console.log(this.state.habitName);
-    console.log(this.state.habitDes);
-    console.log(this.state.frequency);
+    const data = {
+      habitName: this.state.habitName,
+      complete: this.state.habitDes,
+      frequency: this.state.frequency,
+      userId: this.props.user,
+    };
+    fetch("/habitapi/newhabit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).catch((error) => {
+      console.log("Error:", error);
+    });
+
+    e.preventDefault();
+    // this.props.loadFunction(this.state);
   };
   render() {
     return (
@@ -119,7 +134,14 @@ export class NewHabit extends Component {
                   <div className="form-group row">
                     <div className="col-sm-10">
                       <button type="submit" className="btn btn-primary">
-                        Sign in
+                        Add
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
                       </button>
                     </div>
                   </div>
