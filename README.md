@@ -54,6 +54,6 @@ DB_PASS = password
 
 ### Igor & Amita
 - Decided on workflow of website, database, made the login and register page components. Merged frontend and backend. 
-- Get the habits section completed and redirecting. 
+- Get the habits section completed and redirecting, and timestamp. 
 - None for now, just the overall complexity. 
 
