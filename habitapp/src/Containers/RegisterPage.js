@@ -11,50 +11,42 @@ class RegisterPage extends Component {
       password: "",
     };
   }
-
-  handleName = (e) => {
-    this.setState({ name: e.target.value });
-  };
-  handleSurname = (e) => {
-    this.setState({ surname: e.target.value });
-  };
-  handleUsername = (e) => {
-    this.setState({ username: e.target.value });
-  };
-  handlePassword = (e) => {
-    this.setState({ password: e.target.value });
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+      [e.target.surname]: e.target.value,
+      [e.target.username]: e.target.value,
+      [e.target.password]: e.target.value,
+    });
   };
 
   handleSubmit = (e) => {
-    
-    console.log(this.state.name);
-    console.log(this.state.surname);
-    console.log(this.state.username);
-    console.log(this.state.password);
-
+    this.setState({ toLogin: true });
     const data = {
       name: this.state.name,
       surname: this.state.surname,
       username: this.state.username,
-      password_digest: this.state.password
-    }
+      password_digest: this.state.password,
+    };
 
-    fetch('api/signup', {
-      method:"POST",
+    fetch("api/signup", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
-    })
-    .catch((error) => {
-      console.log('Error:', error)
+      body: JSON.stringify(data),
+    }).catch((error) => {
+      console.log("Error:", error);
     });
-  
+
     e.preventDefault();
     // this.props.loadFunction(this.state);
   };
 
   render() {
+    if (this.state.toLogin === true) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="container-fluid" id="HomePage">
         <div className="row">
@@ -68,9 +60,9 @@ class RegisterPage extends Component {
                     <input
                       type="text"
                       className="form-control"
-                      id="name"
+                      name="name"
                       value={this.state.name}
-                      onChange={this.handleName}
+                      onChange={this.handleChange}
                       required
                     />
                   </div>
@@ -79,9 +71,9 @@ class RegisterPage extends Component {
                     <input
                       type="text"
                       className="form-control"
-                      id="surname"
+                      name="surname"
                       value={this.state.surname}
-                      onChange={this.handleSurname}
+                      onChange={this.handleChange}
                       required
                     />
                   </div>
@@ -91,9 +83,9 @@ class RegisterPage extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    id="username"
+                    name="username"
                     value={this.state.username}
-                    onChange={this.handleUsername}
+                    onChange={this.handleChange}
                     required
                   />
                 </div>
@@ -102,9 +94,10 @@ class RegisterPage extends Component {
                   <input
                     type="password"
                     className="form-control"
-                    id="password"
+                    name="password"
                     value={this.state.password}
-                    onChange={this.handlePassword}
+                    onChange={this.handleChange}
+                    autoComplete="on"
                     required
                   />
                 </div>

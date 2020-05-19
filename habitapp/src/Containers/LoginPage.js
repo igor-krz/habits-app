@@ -7,6 +7,7 @@ class LoginPage extends Component {
     this.state = {
       username: "",
       password: "",
+      toDashboard: false,
     };
   }
 
@@ -16,37 +17,37 @@ class LoginPage extends Component {
   handleUsername = (e) => {
     this.setState({ username: e.target.value });
   };
- 
-  handleSubmit = (e) => {
-    
 
+  handleSubmit = (e) => {
+    this.setState({ toDashboard: true });
     const data = {
       username: this.state.username,
-      password_digest: this.state.password
-    }
+      password_digest: this.state.password,
+    };
 
-    fetch('api/signin', {
-      method:"POST",
+    fetch("api/signin", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-    .then(response => response.json())
-     .then(data => {
-          console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.log('Error:', error)
-    });
-  
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+
     e.preventDefault();
     // this.props.loadFunction(this.state);
   };
 
-
-
   render() {
+    if (this.state.toDashboard === true) {
+      return <Redirect to="/dashboard" />;
+    }
     return (
       <div className="container-fluid" id="HomePage">
         <div className="row">
@@ -76,6 +77,7 @@ class LoginPage extends Component {
                     name="password"
                     value={this.state.password}
                     onChange={this.handlePassword}
+                    autoComplete="on"
                   />
                 </div>
                 <button type="submit" className="btn btn-primary">
