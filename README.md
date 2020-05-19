@@ -40,3 +40,20 @@ DB_PASS = password
 
 
 # User Story 
+
+
+
+# StandUps 
+
+## Tuesday 
+
+### Fatima & Rosie 
+- Planned website and after paired with Rosie to do backend - routing and server, knex etc. 
+- Get the habits section completed 
+- Password setup 
+
+### Igor & Amita
+- Decided on workflow of website, database, made the login and register page components. Merged frontend and backend. 
+- Get the habits section completed and redirecting. 
+- None for now, just the overall complexity. 
+
