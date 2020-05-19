@@ -8,6 +8,7 @@ import Navigation from "./Components/Navigation";
 //containers
 import RegisterPage from "./Containers/RegisterPage";
 import LoginPage from "./Containers/LoginPage";
+import Dashboard from "./Containers/Dashboard";
 
 class App extends React.Component {
   render() {
@@ -16,12 +17,11 @@ class App extends React.Component {
         <Router>
           <Navigation />
           <Switch>
-            <Route exact path="/">
-              <LoginPage />
-            </Route>
-            <Route exact path="/register">
-              <RegisterPage />
-            </Route>
+            <Route exact path="/" component={LoginPage} />
+
+            <Route exact path="/register" component={RegisterPage} />
+
+            <Route exact path="/dashboard" component={Dashboard} />
           </Switch>
         </Router>
       </div>
