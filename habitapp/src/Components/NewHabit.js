@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Redirect, Link } from "react-router-dom";
 export class NewHabit extends Component {
   constructor(props) {
     super(props);
@@ -43,6 +43,9 @@ export class NewHabit extends Component {
 
     e.preventDefault();
     // this.props.loadFunction(this.state);
+  };
+  refreshPage = () => {
+    window.location.reload(false);
   };
   render() {
     return (
@@ -140,6 +143,7 @@ export class NewHabit extends Component {
                         type="button"
                         className="btn btn-secondary"
                         data-dismiss="modal"
+                        onClick={this.refreshPage}
                       >
                         Close
                       </button>
