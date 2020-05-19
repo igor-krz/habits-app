@@ -1,7 +1,8 @@
 
 const express = require('express');
 const port = process.env.PORT || 5000;
-const routes =  require('./routes/user-routes'); 
+const routes =  require('./routes/user-routes');
+const habitRoutes = require('./routes/habit-routes');
 const app = express();
 
 //Express middleware
@@ -15,6 +16,7 @@ app.get('/', function(req, res) {
     res.status(200).json({message: 'Route is working'})
 })
 app.use('/api', routes);
+app.use('/habitapi', habitRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on ${port}`)
