@@ -13,7 +13,8 @@ router.get('/:username', (req, res) => {
 });
 
 router.post('/signup', (req, res, next) => {
-    const user = req.body
+    const user = req.body;
+    console.log(req.body);
     Users.hashPassword(user.password_digest)
         .then((hashedPassword)=> {
             delete user.password
@@ -24,7 +25,7 @@ router.post('/signup', (req, res, next) => {
         .then(()=> Users.add(user))
         .then(user => {
             delete user.password_digest
-            res.status(201).json({user})
+            res.status(201).json({message: 'Signup Complete!'})
         })
         .catch((err) => console.error(err))
 
@@ -42,8 +43,7 @@ router.post('/signin', (req, res, next) => {
     .then(token => Users.updateUserToken(token,user.username))
     .then(() => {
         delete user.password_digest
-        res.status(200).json(user)
-        console.log(users)
+        res.status(200).json({message: user.user_id})
     })
     .catch((err) => console.error(err))
 })

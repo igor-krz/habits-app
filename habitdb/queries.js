@@ -16,6 +16,13 @@ function getUserHabits(userid) {
 
 function addHabit(habit) {
     return Habits().insert(habit, 'userId');
+};
+
+// function deleteHabit(userId, habitId){
+//     return Habits().where({userId: userId , habit_id:habitId}).del();
+// }
+function deleteHabit(userId, habit_id) {
+    return Habits().where('userId', (userId)).where('habit_id',(habit_id)).del();
 }
 
 const hashPassword = (password) => {
@@ -76,5 +83,6 @@ module.exports = {
     checkPassword:checkPassword,
     updateUserToken:updateUserToken,
     getUserHabits:getUserHabits,
-    addHabit:addHabit
+    addHabit:addHabit,
+    deleteHabit:deleteHabit
 }
