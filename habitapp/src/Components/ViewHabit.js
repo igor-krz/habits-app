@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-class ViewHabit extends Component {
+import Calendar from './Calendar';
+
+class ViewHabit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,6 +27,7 @@ class ViewHabit extends Component {
               {object.habitName}
               {object.frequency}
               {object.complete}{" "}
+              <Calendar />
             </div>
           ))
         ) : (
