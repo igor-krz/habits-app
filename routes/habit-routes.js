@@ -42,5 +42,17 @@ router.delete('/deletehabit',(req,res,next)=>{
     });
 })
 
+router.put('/:habit_id', (req, res, next) => {
+    if(req.body.hasOwnProperty(!'complete')) {
+        return res.status(422).json({
+            error: "You can only update completed"
+        })
+    }
+    Habits.update(req.params.habit_id, req.body)
+    .catch(function(error) {
+        next(error);
+    })
+})
+
 
 module.exports = router;

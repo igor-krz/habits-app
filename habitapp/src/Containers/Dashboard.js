@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import NewHabit from "../Components/NewHabit";
 import ViewHabit from "../Components/ViewHabit";
+import CompletedHabitsCheck from "../Components/CompletedHabitsCheck";
+
 class Dashboard extends Component {
   componentDidMount() {
     console.log(this.props.location.state.data);
@@ -13,6 +15,8 @@ class Dashboard extends Component {
           <div className="col-lg-2" id="asideArea"></div>
           <div className="col-lg-8">
             <div className="App-body">
+          
+              <CompletedHabitsCheck user={this.props.location.state.data} />
               <NewHabit user={this.props.location.state.data} />
               <ViewHabit user={this.props.location.state.data} />
             </div>

@@ -25,6 +25,14 @@ function deleteHabit(userId, habit_id) {
     return Habits().where('userId', (userId)).where('habit_id',(habit_id)).del();
 }
 
+function updateHabit(habit, updates) {
+    return Habits().where('habit_id', (habit)).update(updates)
+}
+
+function update(username, updates) {
+    return Users().where('username', (username)).update(updates);
+}
+
 const hashPassword = (password) => {
  return new Promise((resolve, reject) => {
     bcrypt.hash(password, 10, (err, hash) => {
@@ -84,5 +92,6 @@ module.exports = {
     updateUserToken:updateUserToken,
     getUserHabits:getUserHabits,
     addHabit:addHabit,
-    deleteHabit:deleteHabit
+    deleteHabit:deleteHabit,
+    updateHabit:updateHabit
 }
