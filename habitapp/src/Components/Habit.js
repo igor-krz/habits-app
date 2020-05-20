@@ -1,67 +1,73 @@
-import React, { Component } from 'react';
-
+import React, { Component } from "react";
 
 class Habit extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isChecked: "false",
+    };
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          completed:['15-04-2020','17-05-2020','19-05-2020', '20-05-2020'],
-          streak:3,
-          consecutives: '',
-          monthDays:[]
-        };
-      }
-    componentDidMount () {
-        const date = new Date()
-        let newMonth;
-        let newDate;
+  // postComplete  = (e,habitID) => {
+  //     const date = new Date()
+  //     let day = date.getDate()
+  //     let month = date.getMonth()+1
+  //     let year = date.getFullYear()
+  //     let completed = day + '-' + month + '-' + year
+  //     console.log(completed)
 
-        let day = date.getDate()
-        let month = date.getMonth()+1
-        if(day.toString().length ===1) {
-            newDate = "" + 0 + day
-        }else {
-            newDate = day
-        }
-        if(month.toString().length === 1 ){
-            newMonth = "" + 0 + month
-        } else {
-            newMonth = month
-        }
-        
-        const today = '21-05';
-        let arraytoday = today.split('-');
-        let lastdate =  this.state.completed[this.state.completed.length - 1].split('-')
-        if(parseInt(arraytoday[0]) - parseInt(lastdate[0]) === 1  ){
-            this.state.streak = this.state.streak + 1
+  //     const data = {
+  //         habitID:habitID,
+  //         complete:completed
+  //       };
 
-        }else {
-            this.state.streak = 0
-        }
-        this.state.completed.map(item => {
-            if(item.split('-')[1] === '05'){
-                this.state.monthDays.push({day:item.split('-')[0]})}
-        })
-        
-        console.log(this.state.monthDays)
+  //       fetch("api/signup", {
+  //         method: "PUT",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(data),
+  //       }).catch((error) => {
+  //         console.log("Error:", error);
+  //       });
+
+  //       e.preventDefault();
+
+  // }
+
+  handleChange = (event) => {
+    let name = event.target.name;
+    this.setState(
+      {
+        isChecked: !this.state.isChecked,
+      },
+      () => this.handleSubmit(name)
+    );
+  };
+
+  handleSubmit = (name) => {
+    if (this.state.isChecked === true) {
+      console.log(name);
     }
+  };
 
-    render() {
-      
-     const   { monthDays } = this.state;
-     console.log(monthDays)
-        return (
-            <div>
-                {/* {monthDays ? monthDays.map(item => <div>{item.day}</div>) : <h3>loading....</h3>} */}
-                {}
-                <h1>May</h1>
-                <p>your month ticks:</p>
-       
-               <h1>hey</h1> 
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        {/* <h1>{this.props.name}</h1> */}
+        <label for={this.props.name}>{this.props.name}</label>
+        <br></br>
+        <input
+          type="checkbox"
+          key={this.props.id}
+          name={this.props.name}
+          value={this.props.name}
+          checked={this.state.isChecked}
+          onChange={this.handleChange}
+        />
+      </div>
+    );
+  }
 }
 
-export default Habit
+export default Habit;
