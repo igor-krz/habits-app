@@ -136,16 +136,12 @@ export class NewHabit extends Component {
 
                   <div className="form-group row">
                     <div className="col-sm-10">
-                      <button type="submit" className="btn btn-primary">
-                        Add
-                      </button>
                       <button
-                        type="button"
-                        className="btn btn-secondary"
-                        data-dismiss="modal"
+                        type="submit"
+                        className="btn btn-primary"
                         onClick={this.refreshPage}
                       >
-                        Close
+                        Add
                       </button>
                     </div>
                   </div>
