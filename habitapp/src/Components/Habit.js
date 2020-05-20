@@ -6,7 +6,7 @@ class Habit extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          completed:['15-04','17-05','19-05', '20-05'],
+          completed:['15-04-2020','17-05-2020','19-05-2020', '20-05-2020'],
           streak:3,
           consecutives: '',
           monthDays:[]
@@ -16,6 +16,7 @@ class Habit extends Component {
         const date = new Date()
         let newMonth;
         let newDate;
+
         let day = date.getDate()
         let month = date.getMonth()+1
         if(day.toString().length ===1) {

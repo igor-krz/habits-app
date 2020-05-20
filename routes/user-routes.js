@@ -2,15 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Users = require('../habitdb/queries');
 
-router.get('/:username', (req, res) => {
-    Users.getSingle(req.params.username)
-    .then(function(showUser) {
-        res.status(200).json(showUser);
-    })
-    .catch(error => {
-        res.status(500).json({message: "cannot retrieve user"})
-    });
-});
+
 
 router.post('/signup', (req, res, next) => {
     const user = req.body;
@@ -48,18 +40,7 @@ router.post('/signin', (req, res, next) => {
     .catch((err) => console.error(err))
 })
 
-router.post('/habits', (req, res, next) => {
-    Users.add(req.body)
-    .then(function(userID) {
-        return Users.getSingle(userID);
-    })
-    .then(function(showUser) {
-        res.json(showUser);
-    })
-    .catch(function(error) {
-        next(error);
-    });
-});
+
 
 router.put('/:username', (req, res, next) => {
     if(req.body.hasOwnProperty('username') || req.body.hasOwnProperty('id'))  {
