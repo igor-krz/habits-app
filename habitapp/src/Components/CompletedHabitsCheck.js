@@ -6,17 +6,21 @@ class CompletedHabitsCheck extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          habitData: []
+          habitData: [],
+          dataObject: []
         };
       }
 
+      // gets habit data
       componentDidMount() {
           fetch(`/habitapi/${this.props.user}`)
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
             this.setState({ habitData: data });
-          });
+          })
+          .then((this.state.habitData).map(item => this.state.dataObject.push({habit_id : item.habit_id, habitName: item.habitName, isChecked: false})))
+          console.log('data obj', this.state.dataObject)
         }
 
 
@@ -27,9 +31,10 @@ class CompletedHabitsCheck extends Component {
       }
 
       handleSubmit = (e) => {
-
+            const complete = this.state.habitData.complete
           const data = {
-              complete: this.state.complete
+              complete: this.state.complete,
+              habitName: this.state.habitData.name
           }
           fetch(`/habitapi/${this.props.user}`, {
             method: "PUT",
