@@ -12,7 +12,7 @@ router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   Users.getSingle(username).then((found) => {
     if (found) {
-      res.json("username already present");
+      res.status(409).json({ message: "username already present" });
     } else {
       Users.hashPassword(user.password_digest)
         .then((hashedPassword) => {
@@ -50,7 +50,7 @@ router.post("/signin", (req, res, next) => {
       };
       res.status(200).json({ userInfo });
     })
-    .catch((err) => console.error(err));
+    .catch((err) => res.status(404).json({ message: "user not found" }));
 });
 
 router.put("/:username", (req, res, next) => {
