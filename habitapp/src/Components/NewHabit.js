@@ -26,15 +26,14 @@ export class NewHabit extends Component {
   //     this.handleSubmit(e);
   //   }
   handleSubmit = (e) => {
-
     const data = {
       habitName: this.state.habitName,
-      description:this.state.habitDes,
+      description: this.state.habitDes,
       frequency: this.state.frequency,
       userId: this.props.user,
-      current_streak:`${this.props.date}-0`,
-      highest_streak:`${this.props.date}-0`
-      
+      current_streak: `${this.props.date}-0`,
+      highest_streak: `${this.props.date}-0`,
+      complete: [],
     };
     fetch("/habitapi/newhabit", {
       method: "POST",
