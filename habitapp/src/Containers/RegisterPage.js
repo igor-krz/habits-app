@@ -35,9 +35,15 @@ class RegisterPage extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    }).catch((error) => {
-      console.log("Error:", error);
-    });
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error(response.status);
+        else return response.json();
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+        alert("username already in use");
+      });
 
     e.preventDefault();
     // this.props.loadFunction(this.state);

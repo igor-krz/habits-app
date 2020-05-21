@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
-
+import alert from "alert";
 class LoginPage extends Component {
   constructor(props) {
     super(props);
@@ -32,13 +32,19 @@ class LoginPage extends Component {
       },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) throw new Error(response.status);
+        else return response.json();
+      })
       .then((data) => {
         console.log(data);
         this.setState({ data: data.userInfo, toDashboard: true });
       })
       .catch((error) => {
-        console.log("Error:", error);
+        console.log("error: " + error);
+        console.log("user not found");
+        alert("wrong username and password");
+        this.setState({ requestFailed: true });
       });
 
     e.preventDefault();

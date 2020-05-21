@@ -7,44 +7,49 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-     date:'',
-     dayWeek:'',
-     weekday:['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+      date: "",
+      dayWeek: "",
+      weekday: [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
     };
   }
 
-
-
   componentDidMount() {
-    const date = new Date()
-    let day = date.getDate()
-    let month = date.getMonth()+1
-    let year = date.getFullYear()
-    let newdate = day + '-' + month + '-' + year
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let newdate = day + "-" + month + "-" + year;
     let dayWeek = this.state.weekday[date.getDay()];
     this.setState({
       date: newdate,
-      dayWeek:dayWeek
-
-    }
-    )
+      dayWeek: dayWeek,
+    });
   }
   render() {
-   const { user_id, userName, userSurname} = this.props.location.state.data
-   const {dayWeek, date}  = this.state
+    const { user_id, userName, userSurname } = this.props.location.state.data;
+    const { dayWeek, date } = this.state;
     return (
       <div className="container-fluid" id="HomePage">
         <h1>{dayWeek}</h1>
-    <h3>Welcome:  {userName} {userSurname}</h3>
-
+        <h3>
+          Welcome: {userName} {userSurname}
+        </h3>
 
         <div className="row">
           <div className="col-lg-2" id="asideArea"></div>
           <div className="col-lg-8">
             <div className="App-body">
-              <HabitCheckForm user={user_id}  date={date}  /> 
-              <NewHabit user={user_id}   date={date} />
-              <ViewHabit user={user_id}   date={date} />
+              <HabitCheckForm user={user_id} date={date} />
+              <NewHabit user={user_id} date={date} />
+              <ViewHabit user={user_id} date={date} />
             </div>
           </div>
           <div className="col-lg-2" id="asideArea"></div>

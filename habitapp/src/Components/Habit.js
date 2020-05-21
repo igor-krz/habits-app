@@ -1,42 +1,51 @@
-import React, { Component } from 'react'
-import Streak from './Streak';
+import React, { Component } from "react";
+import Streak from "./Streak";
 
 class Habit extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isChecked: "false",
+    };
+  }
 
-       isChecked:'false'
-        };
-      }
+  // postComplete  = (e,habitID) => {
+  //     const date = new Date()
+  //     let day = date.getDate()
+  //     let month = date.getMonth()+1
+  //     let year = date.getFullYear()
+  //     let completed = day + '-' + month + '-' + year
+  //     console.log(completed)
+
+  // postComplete  = (e,habitID) => {
+  //
+  //     let completed = day + '-' + month + '-' + year
+  //     console.log(completed)
+
+  //       fetch("api/signup", {
+  //         method: "PUT",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(data),
+  //       }).catch((error) => {
+  //         console.log("Error:", error);
+  //       });
 
 
-    // postComplete  = (e,habitID) => {
-    //   
-    //     let completed = day + '-' + month + '-' + year
-    //     console.log(completed)
+  //       e.preventDefault();
 
-    //     const data = {
-    //         habitID:habitID,
-    //         complete:completed
-    //       };
-      
-    //       fetch("api/signup", {
-    //         method: "PUT",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify(data),
-    //       }).catch((error) => {
-    //         console.log("Error:", error);
-    //       });
-      
-    //       e.preventDefault();
+  // }
 
-    // }
-  
-    
-  
+  handleChange = (event) => {
+    let name = event.target.name;
+    this.setState(
+      {
+        isChecked: !this.state.isChecked,
+      },
+      () => this.handleSubmit(name)
+    );
+  };
 
       
 handleSubmit = (event) => {
@@ -45,8 +54,10 @@ handleSubmit = (event) => {
        
   }
 
-render () {
+
+  render() {
     return (
+
         <div>
             {/* <h1>{this.props.name}</h1> */}
             <label for={this.props.name}>{this.props.name}</label><br></br>
@@ -55,6 +66,7 @@ render () {
             </div>
         )
     }
+
 }
 
-export default Habit
+export default Habit;
