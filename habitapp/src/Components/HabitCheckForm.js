@@ -38,10 +38,28 @@ class HabitCheckForm extends Component {
 
   checkComplete = () => {
     this.state.habits.map((object) => {
-      if (object.complete[object.complete.length - 1] !== this.props.date) {
+      const todaysDate = this.props.date;
+      if (object.complete.length > 0) {
+        const latestDate = object.complete[object.complete.length - 1];
+        console.log(object.complete);
+        const lastDate = new Date(latestDate.split("-").reverse().join("/"));
+        const now = new Date(todaysDate.split("-").reverse().join("/"));
+        const one_day = 1000 * 60 * 60 * 24;
+        const diff = Math.ceil((lastDate.getTime() - now.getTime()) / one_day);
+        if (
+          (object.frequency === "daily" &&
+            object.complete[object.complete.length - 1] !== todaysDate) ||
+          (object.frequency === "weekly" && diff > 7) ||
+          (object.frequency === "monthly" && diff > 30)
+        ) {
+          return toComplete.push(object);
+        } else {
+          console.log("streak shown");
+        }
+      } else if (object.complete.length === 0) {
         return toComplete.push(object);
       } else {
-        console.log("none not completed");
+        console.log("no streak");
       }
     });
   };
@@ -59,6 +77,7 @@ class HabitCheckForm extends Component {
               name={object.habitName}
               current_streak={object.current_streak}
               highest_streak={object.highest_streak}
+              frequency={object.frequency}
               handleDelete={this.props.handleDelete}
             />
           ))

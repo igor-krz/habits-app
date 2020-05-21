@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Streak from "./Streak";
 
 class Habit extends Component {
   constructor(props) {
@@ -9,11 +8,6 @@ class Habit extends Component {
       complete: false,
     };
   }
-
-  handleSubmit = (event) => {
-    const name = event.target.name;
-    console.log(name);
-  };
 
   handleDelete = (event) => {
     const habitID = this.props.id;
@@ -40,8 +34,6 @@ class Habit extends Component {
   };
 
   handleSubmit = (e) => {
-    // console.log(this.props.id);
-    // this.setState({ submitHabit: "submitted" });
     const data = {
       complete: this.props.date,
     };
@@ -59,15 +51,17 @@ class Habit extends Component {
         console.log("Error:", error);
       });
     window.location.reload(false);
+
     e.preventDefault();
   };
 
   render() {
+    console.log(this.props.frequency);
     return (
       <div className="todaysTask">
         <div className="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="basic-addon3">
               <label htmlFor={this.props.name}>{this.props.name}</label>
             </span>
           </div>

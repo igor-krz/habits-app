@@ -7,7 +7,7 @@ export class NewHabit extends Component {
     this.state = {
       habitName: "",
       habitDes: "",
-      frequency: "",
+      frequency: "daily",
       complete: false,
     };
   }
@@ -22,9 +22,6 @@ export class NewHabit extends Component {
     this.setState({ frequency: e.target.value });
   };
 
-  //   componentWillMount(e) {
-  //     this.handleSubmit(e);
-  //   }
   handleSubmit = (e) => {
     const data = {
       habitName: this.state.habitName,
@@ -153,7 +150,7 @@ export class NewHabit extends Component {
                       >
                         <option value="daily">Daily</option>
                         <option value="weekly">Weekly</option>
-                        <option value="monthly">Monthly</option>
+                        <option value="monthly">Monthly - 30 days</option>
                       </select>
                     </div>
                   </div>

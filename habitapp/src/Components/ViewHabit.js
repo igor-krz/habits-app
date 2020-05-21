@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import Streak from "./Streak";
 class ViewHabit extends Component {
   constructor(props) {
     super(props);
@@ -23,8 +24,17 @@ class ViewHabit extends Component {
           this.state.habitData.map((object) => (
             <div key={object}>
               {object.habitName}
+              <br />
               {object.frequency}
+              <br />
               {object.complete}{" "}
+              <Streak
+                date={this.props.date}
+                complete={object.complete}
+                current_streak={object.current_streak}
+                highest_streak={object.highest_streak}
+                frequency={object.frequency}
+              />
             </div>
           ))
         ) : (
