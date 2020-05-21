@@ -19,10 +19,9 @@ class HabitCheckForm extends Component {
           {
             habits: result,
           },
-          () => console.log(this.state.habits)
+          () => this.ToComplete()
         )
       );
-    this.ToComplete();
   }
 
   async ToComplete() {

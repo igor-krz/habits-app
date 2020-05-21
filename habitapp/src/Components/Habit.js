@@ -5,7 +5,7 @@ class Habit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isChecked: "false",
+      submitHabit: false,
     };
   }
 
@@ -36,18 +36,27 @@ class Habit extends Component {
 
   // }
 
-  handleChange = (event) => {
-    let name = event.target.name;
-    this.setState(
-      {
-        isChecked: !this.state.isChecked,
+  handleSubmit = (e) => {
+    // console.log(this.props.id);
+    // this.setState({ submitHabit: "submitted" });
+    const data = {
+      complete: this.props.date,
+    };
+    console.log(data);
+    let habit_id = this.props.id;
+    fetch("/habitapi/addtime/" + habit_id, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
       },
-      () => this.handleSubmit(name)
-    );
-  };
+      body: JSON.stringify(data),
+    })
+      .then((res) => this.setState({ submitHabit: "submitted" }))
+      .catch((error) => {
+        console.log("Error:", error);
+      });
 
-  handleSubmit = (name) => {
-    console.log(name);
+    e.preventDefault();
   };
 
   render() {
@@ -57,6 +66,7 @@ class Habit extends Component {
         <label for={this.props.name}>{this.props.name}</label>
         <br></br>
         <input
+          className={this.state.submitHabit}
           type="button"
           key={this.props.id}
           name={this.props.name}
