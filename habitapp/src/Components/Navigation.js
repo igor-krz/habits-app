@@ -6,7 +6,7 @@ const Navigation = () => {
     <div className="navigation">
       <nav className="navbar" id="mainNav">
         <button type="button" className="btn btn-outline-dark">
-          <Link to="/">Habit Tracker</Link>
+          <Link to="/">Logout</Link>
         </button>
       </nav>
     </div>

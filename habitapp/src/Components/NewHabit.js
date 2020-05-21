@@ -120,7 +120,7 @@ export class NewHabit extends Component {
                       />
                     </div>
                   </div>
-                  <div className="form-group row">
+                  {/* <div className="form-group row">
                     <label
                       htmlFor="frequency"
                       className="col-sm-2 col-form-label"
@@ -129,12 +129,32 @@ export class NewHabit extends Component {
                     </label>
                     <div className="col-sm-10">
                       <input
-                        type="text"
+                        type="number"
+                        id="tentacles"
+                        min="1"
+                        max="100"
                         className="form-control"
                         id="frequency"
                         value={this.state.frequency}
                         onChange={this.handleHabitfrequency}
-                      />
+                      ></input>
+                    </div>
+                  </div> */}
+                  <div className="form-group row">
+                    <label htmlFor="goal" className="col-sm-2 col-form-label">
+                      Goal
+                    </label>
+                    <div className="col-sm-10">
+                      <select
+                        className="form-control"
+                        id="exampleFormControlSelect1"
+                        value={this.state.frequency}
+                        onChange={this.handleHabitfrequency}
+                      >
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                      </select>
                     </div>
                   </div>
 

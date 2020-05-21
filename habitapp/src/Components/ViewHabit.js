@@ -19,9 +19,9 @@ class ViewHabit extends Component {
   render() {
     return (
       <div>
-        {this.state.habitData ===[] ? (
+        {this.state.habitData ? (
           this.state.habitData.map((object) => (
-            <div>
+            <div key={object}>
               {object.habitName}
               {object.frequency}
               {object.complete}{" "}
