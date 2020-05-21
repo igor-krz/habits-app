@@ -13,7 +13,11 @@ class ListHabit extends Component {
         };
       }
 
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> d7955d5e0b8aa51edddffa97d07e2a9d4e69e339
 
 
     render() {
@@ -25,4 +29,8 @@ class ListHabit extends Component {
     }
 }
 
+<<<<<<< HEAD
 export default ListHabit
+=======
+export default ListHabit;
+>>>>>>> d7955d5e0b8aa51edddffa97d07e2a9d4e69e339

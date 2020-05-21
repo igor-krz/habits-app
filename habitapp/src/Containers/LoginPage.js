@@ -35,7 +35,7 @@ class LoginPage extends Component {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        this.setState({ data: data.message, toDashboard: true });
+        this.setState({ data: data.userInfo, toDashboard: true });
       })
       .catch((error) => {
         console.log("Error:", error);

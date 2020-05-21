@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
+
 export class NewHabit extends Component {
   constructor(props) {
     super(props);
@@ -25,11 +26,15 @@ export class NewHabit extends Component {
   //     this.handleSubmit(e);
   //   }
   handleSubmit = (e) => {
+
     const data = {
       habitName: this.state.habitName,
-      complete: this.state.habitDes,
+      description:this.state.habitDes,
       frequency: this.state.frequency,
       userId: this.props.user,
+      current_streak:`${this.props.date}-0`,
+      highest_streak:`${this.props.date}-0`
+      
     };
     fetch("/habitapi/newhabit", {
       method: "POST",

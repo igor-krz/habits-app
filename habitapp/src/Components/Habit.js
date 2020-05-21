@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
+=======
+import React, { Component } from 'react'
+import Streak from './Streak';
+>>>>>>> d7955d5e0b8aa51edddffa97d07e2a9d4e69e339
 
 class Habit extends Component {
   constructor(props) {
@@ -16,10 +21,17 @@ class Habit extends Component {
   //     let completed = day + '-' + month + '-' + year
   //     console.log(completed)
 
+<<<<<<< HEAD
   //     const data = {
   //         habitID:habitID,
   //         complete:completed
   //       };
+=======
+    // postComplete  = (e,habitID) => {
+    //   
+    //     let completed = day + '-' + month + '-' + year
+    //     console.log(completed)
+>>>>>>> d7955d5e0b8aa51edddffa97d07e2a9d4e69e339
 
   //       fetch("api/signup", {
   //         method: "PUT",
@@ -53,6 +65,7 @@ class Habit extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div>
         {/* <h1>{this.props.name}</h1> */}
         <label for={this.props.name}>{this.props.name}</label>
@@ -68,6 +81,16 @@ class Habit extends Component {
       </div>
     );
   }
+=======
+        <div>
+            {/* <h1>{this.props.name}</h1> */}
+            <label for={this.props.name}>{this.props.name}</label><br></br>
+            <input type="checkbox" key={this.props.id}  name={this.props.name} value={this.props.name} checked={this.state.isChecked} onChange={this.handleChange}/>
+            <Streak  complete={this.props.complete} current_streak={this.props.current_streak}  highest_streak={this.props.highest_streak}  date={this.props.date}/>
+            </div>
+        )
+    }
+>>>>>>> d7955d5e0b8aa51edddffa97d07e2a9d4e69e339
 }
 
 export default Habit;

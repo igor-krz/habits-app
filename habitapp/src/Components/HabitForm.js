@@ -74,4 +74,8 @@ import React, { Component } from 'react'
     }
 }
 
+<<<<<<< HEAD
 export default HabitForm
+=======
+export default HabitForm
+>>>>>>> d7955d5e0b8aa51edddffa97d07e2a9d4e69e339
