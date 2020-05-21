@@ -37,6 +37,27 @@
   }
 }
 
-.submitted {
+#submitted {
   display: none;
+}
+
+div#HomePage {
+  background-color: beige;
+}
+.App-body {
+  background-color: ghostwhite;
+  padding: 50px;
+  margin: 15px;
+}
+label {
+  width: 500px;
+  text-align: center;
+  font-size: 15px;
+  /* padding: 5px; */
+  /* margin: 5px; */
+}
+.todaysTask {
+  margin: 10px;
+  padding: 5px;
+  /* justify-content: center; */
 }

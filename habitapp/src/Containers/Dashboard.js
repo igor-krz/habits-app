@@ -48,11 +48,12 @@ class Dashboard extends Component {
           <div className="col-lg-8">
             <div className="App-body">
               <HabitCheckForm user={user_id} date={date} />
-              <NewHabit user={user_id} date={date} />
-              <ViewHabit user={user_id} date={date} />
             </div>
           </div>
-          <div className="col-lg-2" id="asideArea"></div>
+          <div className="col-lg-2" id="asideArea">
+            <NewHabit user={user_id} date={date} />
+            <ViewHabit user={user_id} date={date} />
+          </div>
         </div>
       </div>
     );

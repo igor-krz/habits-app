@@ -22,10 +22,11 @@ class HabitCheckForm extends Component {
           () => this.ToComplete()
         )
       );
+    // this.ToComplete();
   }
 
   async ToComplete() {
-    if (this.state.habits.length !== 0) {
+    if (this.state.habits.length > 0) {
       await this.checkComplete();
       this.setState({
         toComplete: toComplete,
@@ -45,13 +46,12 @@ class HabitCheckForm extends Component {
     });
   };
 
-
   render() {
     console.log(toComplete);
     return (
       <div>
-        {this.state.habits ? (
-          this.state.habits.map((object) => (
+        {this.state.toComplete.length > 0 ? (
+          this.state.toComplete.map((object) => (
             <Habit
               date={this.props.date}
               id={object.habit_id}
@@ -71,7 +71,6 @@ class HabitCheckForm extends Component {
       </div>
     );
   }
-
 }
 
 export default HabitCheckForm;
