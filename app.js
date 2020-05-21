@@ -5,6 +5,9 @@ const routes =  require('./routes/user-routes');
 const habitRoutes = require('./routes/habit-routes');
 const app = express();
 
+const bcrypt = require('bcrypt');                      // bcrypt will encrypt passwords to be saved in db
+const crypto = require('crypto');
+
 //Express middleware
 const bodyParser = require('body-parser') // turns response into usable format
 app.use(bodyParser.json())
