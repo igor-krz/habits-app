@@ -57,3 +57,19 @@ DB_PASS = password
 - Get the habits section completed and redirecting, and timestamp. 
 - None for now, just the overall complexity. 
 
+
+### Group worked all together on Wednesday 
+- Achieved - setting up the habits database, adding habits to database, creating more components (eg for completion feature)
+
+- Plan for today - Complete all the features so fully functioning. Testing and styling. 
+
+- Blocker - no notification on register when try to register with pre-used username even though it doesn’t send to database. 
+- Testing - password bcrypt etc may need to research 
+
+### Thursday 
+- to do : 
+- delete button 
+- checked button to update database 
+- username error message 
+- streak 
+
