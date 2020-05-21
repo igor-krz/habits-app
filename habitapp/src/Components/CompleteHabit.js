@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Redirect } from "react-router-dom";
+
 class CompleteHabit extends Component {
   constructor(props) {
     super(props);
