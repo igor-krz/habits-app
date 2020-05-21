@@ -3,7 +3,7 @@ exports.up = function (knex, Promise) {
     table.increments("user_id").primary();
     table.string("name", 256).notNullable();
     table.string("surname", 256).notNullable();
-    table.text("username", 128).notNullable();
+    table.text("username", 128).notNullable().unique();
     table.text("token").notNullable();
     table.text("password_digest").notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());

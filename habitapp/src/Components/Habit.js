@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Streak from './Streak';
 
 class Habit extends Component {
     constructor(props) {
@@ -11,10 +12,7 @@ class Habit extends Component {
 
 
     // postComplete  = (e,habitID) => {
-    //     const date = new Date()
-    //     let day = date.getDate()
-    //     let month = date.getMonth()+1
-    //     let year = date.getFullYear()
+    //   
     //     let completed = day + '-' + month + '-' + year
     //     console.log(completed)
 
@@ -59,8 +57,8 @@ render () {
         <div>
             {/* <h1>{this.props.name}</h1> */}
             <label for={this.props.name}>{this.props.name}</label><br></br>
-                <input type="checkbox" key={this.props.id}  name={this.props.name} value={this.props.name} checked={this.state.isChecked} onChange={this.handleChange}/>
-                  
+            <input type="checkbox" key={this.props.id}  name={this.props.name} value={this.props.name} checked={this.state.isChecked} onChange={this.handleChange}/>
+            <Streak  complete={this.props.complete} current_streak={this.props.current_streak}  highest_streak={this.props.highest_streak}  date={this.props.date}/>
             </div>
         )
     }

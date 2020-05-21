@@ -2,32 +2,35 @@ const express = require('express');
 const router = express.Router();
 const Users = require('../habitdb/queries');
 
-router.get('/:username', (req, res) => {
-    Users.getSingle(req.params.username)
-    .then(function(showUser) {
-        res.status(200).json(showUser);
-    })
-    .catch(error => {
-        res.status(500).json({message: "cannot retrieve user"})
-    });
-});
 
+router.get('/usernames', (req,res, next) => {
+     let usernames = Users.getUsernames()
+     console.log(usernames)
+     res.send(usernames)
+})
 router.post('/signup', (req, res, next) => {
-    const user = req.body;
-    console.log(req.body);
-    Users.hashPassword(user.password_digest)
-        .then((hashedPassword)=> {
-            delete user.password
-            user.password_digest = hashedPassword
-        })
-        .then(() => Users.createToken())
-        .then(token => user.token = token)
-        .then(()=> Users.add(user))
-        .then(user => {
-            delete user.password_digest
-            res.status(201).json({message: 'Signup Complete!'})
-        })
-        .catch((err) => console.error(err))
+    const user = req.body
+    const username = req.body.username
+    Users.getSingle(username)
+    .then(found => { if(found){
+        res.json('username already present');
+    } else {
+        Users.hashPassword(user.password_digest)
+            .then((hashedPassword)=> {
+                delete user.password
+                user.password_digest = hashedPassword
+            })
+            .then(() => Users.createToken())
+            .then(token => user.token = token)
+            .then(()=> Users.add(user))
+            .then(user => {
+                delete user.password_digest
+                res.status(201).json({message: 'Signup Complete!'})
+            })
+            .catch((err) => console.error(err))
+    }
+} )
+   
 
 })
 
@@ -43,23 +46,13 @@ router.post('/signin', (req, res, next) => {
     .then(token => Users.updateUserToken(token,user.username))
     .then(() => {
         delete user.password_digest
-        res.status(200).json({message: user.user_id})
+        const userInfo = {user_id:user.user_id, userName: user.name, userSurname:user.surname }
+        res.status(200).json({userInfo})
     })
     .catch((err) => console.error(err))
 })
 
-router.post('/habits', (req, res, next) => {
-    Users.add(req.body)
-    .then(function(userID) {
-        return Users.getSingle(userID);
-    })
-    .then(function(showUser) {
-        res.json(showUser);
-    })
-    .catch(function(error) {
-        next(error);
-    });
-});
+
 
 router.put('/:username', (req, res, next) => {
     if(req.body.hasOwnProperty('username') || req.body.hasOwnProperty('id'))  {
