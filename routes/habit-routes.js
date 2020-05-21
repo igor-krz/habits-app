@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Habits = require("../habitdb/queries");
 
-
-
 router.get("/:userid", (req, res, next) => {
   Habits.getUserHabits(req.params.userid)
     .then(function (showHabits) {
@@ -24,7 +22,6 @@ router.get("/completed/:habitid", (req, res, next) => {
     });
 });
 
-
 router.post("/newhabit", (req, res, next) => {
   const habit = req.body;
   Habits.addHabit(habit)
@@ -40,51 +37,51 @@ router.post("/newhabit", (req, res, next) => {
     });
 });
 
-router.put('addtime/:habitId', (req, res, next) => {
-  if(req.body.hasOwnProperty('complete'))  {
+router.put("/addtime/:habitId", (req, res, next) => {
+  console.log(req.body);
+  if (req.body.hasOwnProperty("complete")) {
     Habits.HabitCompleteUpdate(req.params.habitId, req.body.complete)
-    .then(function() {
-        res.status(200).json({message:'date sent!'});
-    })
-    .catch(function(error){
+      .then(function () {
+        res.status(200).json({ message: "date sent!" });
+      })
+      .catch(function (error) {
         next(error);
-    });
-    
-  } else {
-     return res.status(422).json({
-        error: "You can only update complete column"
-     });
-  }
-  
-});
-
-router.put('addStrike/:habitId', (req, res, next) => {
-  if(req.body.hasOwnProperty('current_strike') || req.body.hasOwnProperty('highest_strike'))  {
-    Habits.HabitUpdate(req.params.habitId, req.body)
-  .then(function() {
-      res.status(200).json({message:'strikes updated!'});
-  })
-  .catch(function(error){
-      next(error);
-  });
+      });
   } else {
     return res.status(422).json({
-      error: "You can only update current strike and highest strike column"
-   });
+      error: "You can only update complete column",
+    });
   }
-
 });
 
-router.delete('/deletehabit',(req,res,next)=>{
-    const habitId=req.body.habit_id;
-    console.log(req.body)
-    Habits.deleteHabit( habitId)
-    .then(res.send('Delete successful!'))
-    .catch(error => {
-        console.log(error);
-        res.status(500).json({message: "cannot delete habits"})
+router.put("/addStrike/:habitId", (req, res, next) => {
+  if (
+    req.body.hasOwnProperty("current_strike") ||
+    req.body.hasOwnProperty("highest_strike")
+  ) {
+    Habits.HabitUpdate(req.params.habitId, req.body)
+      .then(function () {
+        res.status(200).json({ message: "strikes updated!" });
+      })
+      .catch(function (error) {
+        next(error);
+      });
+  } else {
+    return res.status(422).json({
+      error: "You can only update current strike and highest strike column",
     });
-})
+  }
+});
 
+router.delete("/deletehabit", (req, res, next) => {
+  const habitId = req.body.habit_id;
+  console.log(req.body);
+  Habits.deleteHabit(habitId)
+    .then(res.send("Delete successful!"))
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({ message: "cannot delete habits" });
+    });
+});
 
 module.exports = router;

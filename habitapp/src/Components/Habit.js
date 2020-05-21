@@ -2,42 +2,14 @@ import React, { Component } from 'react'
 import Streak from './Streak';
 
 class Habit extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-
-       isChecked:'false',
-       complete: false
+          submitHabit: false,
+          complete: false
         }
       }
-
-
-    // postComplete  = (e,habitID) => {
-    //   
-    //     let completed = day + '-' + month + '-' + year
-    //     console.log(completed)
-
-    //     const data = {
-    //         habitID:habitID,
-    //         complete:completed
-    //       };
-      
-    //       fetch("api/signup", {
-    //         method: "PUT",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify(data),
-    //       }).catch((error) => {
-    //         console.log("Error:", error);
-    //       });
-      
-    //       e.preventDefault();
-
-    // }
-  
-    
-  
 
       
 handleSubmit = (event) => {
@@ -71,16 +43,55 @@ refreshPage = () => {
     window.location.reload(false);
   };
 
-render () {
+
+
+  handleSubmit = (e) => {
+    // console.log(this.props.id);
+    // this.setState({ submitHabit: "submitted" });
+    const data = {
+      complete: this.props.date,
+    };
+    console.log(data);
+    let habit_id = this.props.id;
+    fetch("/habitapi/addtime/" + habit_id, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => this.setState({ submitHabit: "submitted" }))
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+
+    e.preventDefault();
+  };
+
+  render() {
     return (
-        <div>
-            <label for={this.props.name}>{this.props.name}</label><br></br>
-            <input type="button" key={this.props.id}  name={this.props.name} value={this.props.name} onClick={this.handleSubmit}/>
-            <Streak  complete={this.props.complete} current_streak={this.props.current_streak}  highest_streak={this.props.highest_streak}  date={this.props.date}/>
-            <button onClick={this.handleDelete.bind(this, this.props.id)}> Delete </button>
-        </div>
-        )
-    }
+      <div>
+        {/* <h1>{this.props.name}</h1> */}
+        <label for={this.props.name}>{this.props.name}</label>
+        <br></br>
+        <input
+          className={this.state.submitHabit}
+          type="button"
+          key={this.props.id}
+          name={this.props.name}
+          value={this.props.name}
+          onClick={this.handleSubmit}
+        />
+        <Streak
+          complete={this.props.complete}
+          current_streak={this.props.current_streak}
+          highest_streak={this.props.highest_streak}
+          date={this.props.date}
+        />
+        <button onClick={this.handleDelete.bind(this, this.props.id)}> Delete </button>
+      </div>
+    );
+  }
 }
 
 export default Habit
