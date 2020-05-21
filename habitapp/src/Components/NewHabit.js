@@ -8,7 +8,7 @@ export class NewHabit extends Component {
       habitName: "",
       habitDes: "",
       frequency: "",
-      complete: false,
+      complete: 'false',
     };
   }
 

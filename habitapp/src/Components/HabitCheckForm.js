@@ -8,7 +8,7 @@ class HabitCheckForm extends Component {
     this.state = {
       habits: [],
       completeArray: "",
-      toComplete: [],
+      toComplete: []
     };
   }
   componentDidMount() {
@@ -19,14 +19,14 @@ class HabitCheckForm extends Component {
           {
             habits: result,
           },
-          () => console.log(this.state.habits)
+          () => this.ToComplete()
         )
       );
-    this.ToComplete();
+    // this.ToComplete();
   }
 
   async ToComplete() {
-    if (this.state.habits.length !== 0) {
+    if (this.state.habits.length > 0) {
       await this.checkComplete();
       this.setState({
         toComplete: toComplete,
@@ -41,6 +41,7 @@ class HabitCheckForm extends Component {
       if (object.complete[object.complete.length - 1] !== this.props.date) {
         return toComplete.push(object);
       } else {
+        
         console.log("none not completed");
       }
     });
@@ -51,8 +52,8 @@ class HabitCheckForm extends Component {
     console.log(toComplete);
     return (
       <div>
-        {this.state.habits ? (
-          this.state.habits.map((object) => (
+        {this.state.toComplete.length > 0 ? (
+          this.state.toComplete.map((object) => (
             <Habit
               date={this.props.date}
               id={object.habit_id}
@@ -63,7 +64,7 @@ class HabitCheckForm extends Component {
               handleDelete={this.props.handleDelete}
             />
           ))
-        ) : (
+        ) :     (
           <div>
             {" "}
             <h1>No Habits to complete</h1>{" "}
