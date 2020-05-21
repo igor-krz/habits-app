@@ -49,7 +49,7 @@ let toComplete = [];
         console.log(toComplete)
         return (
             <div>
-                {this.state.toComplete.length !== 0 ? this.state.toComplete.map(object => <Habit date={this.props.date}  id={object.habit_id} complete={object.complete}  name={object.habitName} current_streak={object.current_streak} highest_streak={object.highest_streak} />) : <div> <h1>No Habits to complete</h1> </div>}
+                {this.state.habits ? this.state.habits.map(object => <Habit date={this.props.date}  id={object.habit_id} complete={object.complete}  name={object.habitName} current_streak={object.current_streak} highest_streak={object.highest_streak} />) : <div> <h1>No Habits to complete</h1> </div>}
             
             </div>
         )

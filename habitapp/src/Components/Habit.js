@@ -36,20 +36,13 @@ class Habit extends Component {
     // }
   
     
-      handleChange = (event) => {
-          let name =event.target.name
-        this.setState({
-            isChecked: !this.state.isChecked
-        },() => this.handleSubmit(name)
+  
 
-        )
-
-      }
-
-  handleSubmit = (name) => {
-       if(this.state.isChecked ===true) {
-           console.log(name)
-       }
+      
+handleSubmit = (event) => {
+     const  name= event.target.name
+    console.log(name)
+       
   }
 
 render () {
@@ -57,7 +50,7 @@ render () {
         <div>
             {/* <h1>{this.props.name}</h1> */}
             <label for={this.props.name}>{this.props.name}</label><br></br>
-            <input type="checkbox" key={this.props.id}  name={this.props.name} value={this.props.name} checked={this.state.isChecked} onChange={this.handleChange}/>
+            <input type="button" key={this.props.id}  name={this.props.name} value={this.props.name} onClick={this.handleSubmit}/>
             <Streak  complete={this.props.complete} current_streak={this.props.current_streak}  highest_streak={this.props.highest_streak}  date={this.props.date}/>
             </div>
         )
