@@ -46,6 +46,7 @@ class HabitCheckForm extends Component {
     });
   };
 
+
   render() {
     console.log(toComplete);
     return (
@@ -70,6 +71,7 @@ class HabitCheckForm extends Component {
       </div>
     );
   }
+
 }
 
 export default HabitCheckForm;

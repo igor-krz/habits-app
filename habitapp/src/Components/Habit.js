@@ -32,6 +32,7 @@ class Habit extends Component {
   //         console.log("Error:", error);
   //       });
 
+
   //       e.preventDefault();
 
   // }
@@ -46,32 +47,26 @@ class Habit extends Component {
     );
   };
 
-  handleSubmit = (name) => {
-    console.log(name);
-  };
+      
+handleSubmit = (event) => {
+     const  name= event.target.name
+    console.log(name)
+       
+  }
+
 
   render() {
     return (
-      <div>
-        {/* <h1>{this.props.name}</h1> */}
-        <label for={this.props.name}>{this.props.name}</label>
-        <br></br>
-        <input
-          type="button"
-          key={this.props.id}
-          name={this.props.name}
-          value={this.props.name}
-          onClick={this.handleSubmit}
-        />
-        <Streak
-          complete={this.props.complete}
-          current_streak={this.props.current_streak}
-          highest_streak={this.props.highest_streak}
-          date={this.props.date}
-        />
-      </div>
-    );
-  }
+
+        <div>
+            {/* <h1>{this.props.name}</h1> */}
+            <label for={this.props.name}>{this.props.name}</label><br></br>
+            <input type="button" key={this.props.id}  name={this.props.name} value={this.props.name} onClick={this.handleSubmit}/>
+            <Streak  complete={this.props.complete} current_streak={this.props.current_streak}  highest_streak={this.props.highest_streak}  date={this.props.date}/>
+            </div>
+        )
+    }
+
 }
 
 export default Habit;
