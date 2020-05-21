@@ -6,9 +6,42 @@ class Habit extends Component {
     super(props);
     this.state = {
       submitHabit: false,
+      complete: false,
     };
   }
+
+  handleSubmit = (event) => {
+    const name = event.target.name;
+    console.log(name);
+  };
+
+  handleDelete = (event) => {
+    const habitID = this.props.id;
+
+    fetch("habitapi/deletehabit", {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        habit_id: habitID,
+      }),
+    })
+      .then((response) => {
+        response.json();
+        console.log(response);
+      })
+      .then(this.refreshPage);
+  };
+
+  refreshPage = () => {
+    window.location.reload(false);
+  };
+
   handleSubmit = (e) => {
+    // console.log(this.props.id);
+    // this.setState({ submitHabit: "submitted" });
     const data = {
       complete: this.props.date,
     };
@@ -25,11 +58,8 @@ class Habit extends Component {
       .catch((error) => {
         console.log("Error:", error);
       });
-  };
 
-  handleSubmit = (event) => {
-    const name = event.target.name;
-    console.log(name);
+    e.preventDefault();
   };
 
   render() {
@@ -39,6 +69,7 @@ class Habit extends Component {
         <label for={this.props.name}>{this.props.name}</label>
         <br></br>
         <input
+          className={this.state.submitHabit}
           type="button"
           key={this.props.id}
           name={this.props.name}
@@ -51,6 +82,10 @@ class Habit extends Component {
           highest_streak={this.props.highest_streak}
           date={this.props.date}
         />
+        <button onClick={this.handleDelete.bind(this, this.props.id)}>
+          {" "}
+          Delete{" "}
+        </button>
       </div>
     );
   }

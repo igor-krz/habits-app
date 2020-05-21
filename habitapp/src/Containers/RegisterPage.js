@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-
 class RegisterPage extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +20,6 @@ class RegisterPage extends Component {
       [e.target.repassword]: e.target.value,
     });
   };
-
   handleSubmit = (e) => {
     this.setState({ toLogin: true });
     if (this.state.password === this.state.repassword) {
@@ -31,7 +29,6 @@ class RegisterPage extends Component {
         username: this.state.username,
         password_digest: this.state.password,
       };
-
       fetch("api/signup", {
         method: "POST",
         headers: {
@@ -51,10 +48,8 @@ class RegisterPage extends Component {
     } else {
       alert("the password is not the same");
     }
-
     // this.props.loadFunction(this.state);
   };
-
   render() {
     if (this.state.toLogin === true) {
       return <Redirect to="/" />;
@@ -137,5 +132,4 @@ class RegisterPage extends Component {
     );
   }
 }
-
 export default RegisterPage;
