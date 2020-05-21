@@ -60,6 +60,7 @@ class HabitCheckForm extends Component {
               name={object.habitName}
               current_streak={object.current_streak}
               highest_streak={object.highest_streak}
+              handleDelete={this.props.handleDelete}
             />
           ))
         ) : (

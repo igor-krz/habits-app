@@ -1,51 +1,43 @@
-import React, { Component } from "react";
-import Streak from "./Streak";
+import React, { Component } from 'react'
+import Streak from './Streak';
 
 class Habit extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isChecked: "false",
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
 
-  // postComplete  = (e,habitID) => {
-  //     const date = new Date()
-  //     let day = date.getDate()
-  //     let month = date.getMonth()+1
-  //     let year = date.getFullYear()
-  //     let completed = day + '-' + month + '-' + year
-  //     console.log(completed)
-
-  // postComplete  = (e,habitID) => {
-  //
-  //     let completed = day + '-' + month + '-' + year
-  //     console.log(completed)
-
-  //       fetch("api/signup", {
-  //         method: "PUT",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(data),
-  //       }).catch((error) => {
-  //         console.log("Error:", error);
-  //       });
+       isChecked:'false',
+       complete: false
+        }
+      }
 
 
-  //       e.preventDefault();
+    // postComplete  = (e,habitID) => {
+    //   
+    //     let completed = day + '-' + month + '-' + year
+    //     console.log(completed)
 
-  // }
+    //     const data = {
+    //         habitID:habitID,
+    //         complete:completed
+    //       };
+      
+    //       fetch("api/signup", {
+    //         method: "PUT",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(data),
+    //       }).catch((error) => {
+    //         console.log("Error:", error);
+    //       });
+      
+    //       e.preventDefault();
 
-  handleChange = (event) => {
-    let name = event.target.name;
-    this.setState(
-      {
-        isChecked: !this.state.isChecked,
-      },
-      () => this.handleSubmit(name)
-    );
-  };
+    // }
+  
+    
+  
 
       
 handleSubmit = (event) => {
@@ -54,19 +46,41 @@ handleSubmit = (event) => {
        
   }
 
+handleDelete = (event) => {
+    const habitID = this.props.id
 
-  render() {
+    fetch('habitapi/deletehabit', {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            'habit_id': habitID
+        })
+    })
+    .then((response) => {
+            response.json();
+            console.log(response);
+        }
+        )
+    .then(this.refreshPage);
+}
+
+refreshPage = () => {
+    window.location.reload(false);
+  };
+
+render () {
     return (
-
         <div>
-            {/* <h1>{this.props.name}</h1> */}
             <label for={this.props.name}>{this.props.name}</label><br></br>
             <input type="button" key={this.props.id}  name={this.props.name} value={this.props.name} onClick={this.handleSubmit}/>
             <Streak  complete={this.props.complete} current_streak={this.props.current_streak}  highest_streak={this.props.highest_streak}  date={this.props.date}/>
-            </div>
+            <button onClick={this.handleDelete.bind(this, this.props.id)}> Delete </button>
+        </div>
         )
     }
-
 }
 
-export default Habit;
+export default Habit
