@@ -11,20 +11,17 @@ class LoginPage extends Component {
       toDashboard: false,
     };
   }
-
   handlePassword = (e) => {
     this.setState({ password: e.target.value });
   };
   handleUsername = (e) => {
     this.setState({ username: e.target.value });
   };
-
   handleSubmit = (e) => {
     const data = {
       username: this.state.username,
       password_digest: this.state.password,
     };
-
     fetch("api/signin", {
       method: "POST",
       headers: {
@@ -46,11 +43,9 @@ class LoginPage extends Component {
         alert("wrong username and password");
         this.setState({ requestFailed: true });
       });
-
     e.preventDefault();
     // this.props.loadFunction(this.state);
   };
-
   render() {
     if (this.state.toDashboard === true) {
       return (
@@ -109,5 +104,4 @@ class LoginPage extends Component {
     );
   }
 }
-
 export default LoginPage;

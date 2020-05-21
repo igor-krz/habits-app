@@ -1,40 +1,49 @@
-import React, { Component } from "react";
-import Streak from "./Streak";
+import React, { Component } from 'react'
+import Streak from './Streak';
 
 class Habit extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      submitHabit: false,
-    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          submitHabit: false,
+          complete: false
+        }
+      }
+
+      
+handleSubmit = (event) => {
+     const  name= event.target.name
+    console.log(name)
+       
   }
 
-  // postComplete  = (e,habitID) => {
-  //     const date = new Date()
-  //     let day = date.getDate()
-  //     let month = date.getMonth()+1
-  //     let year = date.getFullYear()
-  //     let completed = day + '-' + month + '-' + year
-  //     console.log(completed)
+handleDelete = (event) => {
+    const habitID = this.props.id
 
-  // postComplete  = (e,habitID) => {
-  //
-  //     let completed = day + '-' + month + '-' + year
-  //     console.log(completed)
+    fetch('habitapi/deletehabit', {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            'habit_id': habitID
+        })
+    })
+    .then((response) => {
+            response.json();
+            console.log(response);
+        }
+        )
+    .then(this.refreshPage);
+}
 
-  //       fetch("api/signup", {
-  //         method: "PUT",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(data),
-  //       }).catch((error) => {
-  //         console.log("Error:", error);
-  //       });
+refreshPage = () => {
+    window.location.reload(false);
+  };
 
-  //       e.preventDefault();
 
-  // }
 
   handleSubmit = (e) => {
     // console.log(this.props.id);
@@ -79,9 +88,10 @@ class Habit extends Component {
           highest_streak={this.props.highest_streak}
           date={this.props.date}
         />
+        <button onClick={this.handleDelete.bind(this, this.props.id)}> Delete </button>
       </div>
     );
   }
 }
 
-export default Habit;
+export default Habit
