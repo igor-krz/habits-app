@@ -8,37 +8,7 @@ class Habit extends Component {
       submitHabit: false,
     };
   }
-
-  // postComplete  = (e,habitID) => {
-  //     const date = new Date()
-  //     let day = date.getDate()
-  //     let month = date.getMonth()+1
-  //     let year = date.getFullYear()
-  //     let completed = day + '-' + month + '-' + year
-  //     console.log(completed)
-
-  // postComplete  = (e,habitID) => {
-  //
-  //     let completed = day + '-' + month + '-' + year
-  //     console.log(completed)
-
-  //       fetch("api/signup", {
-  //         method: "PUT",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(data),
-  //       }).catch((error) => {
-  //         console.log("Error:", error);
-  //       });
-
-  //       e.preventDefault();
-
-  // }
-
   handleSubmit = (e) => {
-    // console.log(this.props.id);
-    // this.setState({ submitHabit: "submitted" });
     const data = {
       complete: this.props.date,
     };
@@ -55,8 +25,11 @@ class Habit extends Component {
       .catch((error) => {
         console.log("Error:", error);
       });
+  };
 
-    e.preventDefault();
+  handleSubmit = (event) => {
+    const name = event.target.name;
+    console.log(name);
   };
 
   render() {
@@ -66,7 +39,6 @@ class Habit extends Component {
         <label for={this.props.name}>{this.props.name}</label>
         <br></br>
         <input
-          className={this.state.submitHabit}
           type="button"
           key={this.props.id}
           name={this.props.name}
