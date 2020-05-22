@@ -51,7 +51,7 @@ export class NewHabit extends Component {
       <div>
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-primary btn-lg btn-block"
           data-toggle="modal"
           data-target=".bd-example-modal-lg"
         >
