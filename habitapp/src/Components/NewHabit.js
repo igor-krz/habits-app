@@ -6,12 +6,11 @@ export class NewHabit extends Component {
     super(props);
     this.state = {
       habitName: "",
-      habitDes: "",
+      habitDes: "food",
       frequency: "daily",
       complete: false,
     };
   }
-
   handleHabitname = (e) => {
     this.setState({ habitName: e.target.value });
   };
@@ -21,7 +20,6 @@ export class NewHabit extends Component {
   handleHabitfrequency = (e) => {
     this.setState({ frequency: e.target.value });
   };
-
   handleSubmit = (e) => {
     const data = {
       habitName: this.state.habitName,
@@ -108,35 +106,24 @@ export class NewHabit extends Component {
                       Description
                     </label>
                     <div className="col-sm-10">
-                      <input
-                        type="text"
+                      <select
                         className="form-control"
-                        id="habitDes"
+                        id="exampleFormControlSelect2"
                         value={this.state.habitDes}
                         onChange={this.handleHabitdes}
-                      />
+                      >
+                        <option value="food">Food</option>
+                        <option value="drinks">Drinks</option>
+                        <option value="activities">Activities</option>
+                        <option value="lifestyle">Lifestyle</option>
+                        <option value="sports">Sports</option>
+                        <option value="education">Education</option>
+                        <option value="hygiene">Hygiene</option>
+                        <option value="nature">Nature</option>
+                        <option value="household">Household</option>
+                      </select>
                     </div>
                   </div>
-                  {/* <div className="form-group row">
-                    <label
-                      htmlFor="frequency"
-                      className="col-sm-2 col-form-label"
-                    >
-                      Frequency
-                    </label>
-                    <div className="col-sm-10">
-                      <input
-                        type="number"
-                        id="tentacles"
-                        min="1"
-                        max="100"
-                        className="form-control"
-                        id="frequency"
-                        value={this.state.frequency}
-                        onChange={this.handleHabitfrequency}
-                      ></input>
-                    </div>
-                  </div> */}
                   <div className="form-group row">
                     <label htmlFor="goal" className="col-sm-2 col-form-label">
                       Goal

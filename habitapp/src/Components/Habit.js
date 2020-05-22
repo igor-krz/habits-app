@@ -8,26 +8,26 @@ class Habit extends Component {
       complete: false,
     };
   }
-
-  handleDelete = (event) => {
+  handleDelete(event) {
     const habitID = this.props.id;
-
-    fetch("habitapi/deletehabit", {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        habit_id: habitID,
-      }),
-    })
-      .then((response) => {
-        response.json();
-        console.log(response);
+    if (window.confirm("Are you sure you want to delete it forever") === true) {
+      fetch("habitapi/deletehabit", {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          habit_id: habitID,
+        }),
       })
-      .then(this.refreshPage);
-  };
+        .then((response) => {
+          response.json();
+          console.log(response);
+        })
+        .then(this.refreshPage());
+    }
+  }
 
   refreshPage = () => {
     window.location.reload(false);
@@ -56,13 +56,17 @@ class Habit extends Component {
   };
 
   render() {
-    console.log(this.props.frequency);
+    const logo = this.props.description;
+    const logo1 = logo + ".png";
     return (
       <div className="todaysTask">
         <div className="input-group">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="basic-addon3">
-              <label htmlFor={this.props.name}>{this.props.name}</label>
+            <span className="input-group-text" id={logo}>
+              <img src={logo1} alt="Avatar" className="habitimage" />
+              <label htmlFor={this.props.name} className="habitLabel">
+                {this.props.name}
+              </label>
             </span>
           </div>
           <div className="input-group-append">
@@ -74,14 +78,14 @@ class Habit extends Component {
               id={this.state.submitHabit}
               onClick={this.handleSubmit}
             >
-              ✔
+              <img src="ok.png" alt="Avatar" className="habitimage1" />
             </button>
             <button
               onClick={this.handleDelete.bind(this, this.props.id)}
               className="btn btn-outline-danger"
               type="button"
             >
-              ❌
+              <img src="trash.png" alt="Avatar" className="habitimage1" />
             </button>
           </div>
         </div>

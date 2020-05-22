@@ -40,12 +40,13 @@ class LoginPage extends Component {
       .catch((error) => {
         console.log("error: " + error);
         console.log("user not found");
-        alert("wrong username and password");
+        window.alert("wrong username and password");
         this.setState({ requestFailed: true });
       });
     e.preventDefault();
     // this.props.loadFunction(this.state);
   };
+
   render() {
     if (this.state.toDashboard === true) {
       return (
@@ -58,13 +59,13 @@ class LoginPage extends Component {
       );
     }
     return (
-      <div  className="container-fluid" id="HomePage">
+      <div className="container-fluid" id="HomePage">
         <div className="row">
           <div className="col-lg-3" id="asideArea"></div>
           <div className="col-lg-6">
-            <div className="App-body">
+            <div className="App-body" id="formArea">
               <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
+                <div className="form-group row">
                   <label htmlFor="username">Username</label>
                   <input
                     type="text"
@@ -76,25 +77,26 @@ class LoginPage extends Component {
                     required
                   />
                 </div>
-                <div className="form-group">
+                <div className="form-group row">
                   <label htmlFor="password">Password</label>
                   <input
                     type="password"
                     className="form-control"
                     id="password"
-                    placeholder="Password"
                     name="password"
                     value={this.state.password}
                     onChange={this.handlePassword}
                     autoComplete="on"
                   />
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="loginButton">
                   Login
                 </button>
-                <button type="button" className="btn btn-outline-dark">
-                  <Link to="/register">Sign Up</Link>
-                </button>
+                <Link to="/register">
+                  <button type="button" className="loginButton">
+                    Sign up
+                  </button>
+                </Link>
               </form>
             </div>
           </div>

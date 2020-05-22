@@ -10,8 +10,6 @@ import RegisterPage from "./Containers/RegisterPage";
 import LoginPage from "./Containers/LoginPage";
 import Dashboard from "./Containers/Dashboard";
 
-
-
 class App extends React.Component {
   render() {
     return (

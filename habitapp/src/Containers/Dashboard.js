@@ -38,19 +38,19 @@ class Dashboard extends Component {
     const { dayWeek, date } = this.state;
     return (
       <div className="container-fluid" id="HomePage">
-        <h1>{dayWeek}</h1>
-        <h3>
-          Welcome: {userName} {userSurname}
-        </h3>
-
         <div className="row">
-          <div className="col-lg-1" id="asideArea"></div>
-          <div className="col-lg-6">
+          <div className="col-lg-2" id="asideArea">
+            <h1>{dayWeek}</h1>
+            <h3>
+              Welcome: {userName} {userSurname}
+            </h3>
+          </div>
+          <div className="col-lg-7">
             <div className="App-body">
               <HabitCheckForm user={user_id} date={date} />
             </div>
           </div>
-          <div className="col-lg-5" id="asideArea">
+          <div className="col-lg-3" id="asideArea">
             <NewHabit user={user_id} date={date} />
             <ViewHabit user={user_id} date={date} />
           </div>
