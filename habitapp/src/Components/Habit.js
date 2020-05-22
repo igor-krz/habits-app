@@ -71,7 +71,7 @@ class Habit extends Component {
           </div>
           <div className="input-group-append">
             <button
-              className="btn btn-outline-success"
+              className="btn btn-outline-success button-style"
               type="button"
               key={this.props.id}
               name={this.props.name}
@@ -82,7 +82,7 @@ class Habit extends Component {
             </button>
             <button
               onClick={this.handleDelete.bind(this, this.props.id)}
-              className="btn btn-outline-danger"
+              className="btn btn-outline-danger button-style"
               type="button"
             >
               <img src="trash.png" alt="Avatar" className="habitimage1" />

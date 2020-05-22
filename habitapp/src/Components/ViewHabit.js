@@ -34,7 +34,7 @@ class ViewHabit extends Component {
               <div className="input-group" id="viewHabits">
                 <div className="input-group-prepend">
                   <span className="input-group-text">
-                    <label>{object.description}</label>
+                    <label>{object.description} : {object.frequency}</label>
                   </span>
                   <span className="input-group-text">
                     <label htmlFor={object.habitName} className="habitLabel">

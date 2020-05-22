@@ -233,20 +233,6 @@ describe('API routes', function() {
     })
 
     describe('POST /api/signin', function() {
-        // it('should sign user in to their user space', function(done){
-        //     chai.request(app)
-        //     .post('/api/signin')
-        //     .send({
-        //         username: 'Sport',
-        //         password_digest: 'Sport'
-        //     })
-        //     .end(function(err, res){
-        //         res.should.have.status(200);
-        //         res.should.be.json; // jshint ignore:line
-        //         res.body.should.be.a('object');
-        //         done();
-        //     })
-        // })
         it('should not accept wrong password', function(done){
             chai.request(app)
             .post('/api/signin')
