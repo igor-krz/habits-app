@@ -9,6 +9,7 @@ class RegisterPage extends Component {
       username: "",
       password: "",
       repassword: "",
+      tologin: false,
     };
   }
   handleChange = (e) => {
@@ -21,34 +22,37 @@ class RegisterPage extends Component {
     });
   };
   handleSubmit = (e) => {
-    this.setState({ toLogin: true });
     if (this.state.password === this.state.repassword) {
-      const data = {
-        name: this.state.name,
-        surname: this.state.surname,
-        username: this.state.username,
-        password_digest: this.state.password,
-      };
-      fetch("api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => {
-          if (!response.ok) throw new Error(response.status);
-          else return response.json();
+      if (this.state.password.length < 8) {
+        alert("the password must be 8 character long");
+      } else {
+        const data = {
+          name: this.state.name,
+          surname: this.state.surname,
+          username: this.state.username,
+          password_digest: this.state.password,
+        };
+        fetch("api/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
         })
-        .catch((error) => {
-          console.log("Error:", error);
-          alert("username already in use");
-        });
-      e.preventDefault();
+          .then((response) => {
+            if (!response.ok) throw new Error(response.status);
+            else return response.json();
+          })
+          .catch((error) => {
+            console.log("Error:", error);
+            alert("username already in use");
+          });
+        this.setState({ toLogin: true });
+        e.preventDefault();
+      }
     } else {
       alert("the password is not the same");
     }
-    // this.props.loadFunction(this.state);
   };
   render() {
     if (this.state.toLogin === true) {

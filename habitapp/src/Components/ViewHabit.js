@@ -24,16 +24,12 @@ class ViewHabit extends Component {
   render() {
     return (
       <div>
-        {this.state.habitData ? (
+        {this.state.habitData.description !== "drinks" ? (
           this.state.habitData.map((object) => (
             <div key={object}>
-              <button onClick={this.handleShowhabit}>
-                {object.description}
-              </button>
-              <div id={this.state.displayHabit}>{object.name}</div>
-
+              {object.habitName}
+              {object.description}
               <br />
-
               <Streak
                 date={this.props.date}
                 complete={object.complete}
