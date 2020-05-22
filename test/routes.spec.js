@@ -32,16 +32,7 @@ describe('API routes', function() {
       });
 
 
-    // describe('POST /api/signup', function() {
-    //     it('should add a new user to database', function(done){
-    //         chai.request(app)
-    //         .post('api/signup')
-    //         .send({
-
-    //         })
-
-    //     })
-    // })
+    
 
 
     // habit table api tests ...
@@ -99,7 +90,7 @@ describe('API routes', function() {
                 habitName: "Swimming",
 	            frequency: "daily",
 	            description: "swim in sea",
-	            complete: "{14-04-2020,06-05-2020,19-05-2020}",
+                complete: ['14-04-2020','06-05-2020','19-05-2020'],
 	            current_streak: "19-05-2020-7",
 	            highest_streak: "19-05-2020-7",
 	            userId: 2
@@ -108,20 +99,7 @@ describe('API routes', function() {
                 res.should.have.status(200);
                 res.should.be.json; 
                 res.body.should.be.a('object');
-                res.body.should.have.property('habitName');
-                res.body.habitName.should.equal('Swimming');
-                res.body.should.have.property('frequency');
-                res.body.frequency.should.equal('daily');
-                res.body.should.have.property('description');
-                res.body.description.should.equal('swim in sea');
-                res.body.should.have.property('complete');
-                res.body.complete.should.equal('{14-04-2020,06-05-2020,19-05-2020}');
-                res.body.should.have.property('current_streak');
-                res.body.current_streak.should.equal('19-05-2020-7');
-                res.body.should.have.property('highest_streak');
-                res.body.highest_streak.should.equal('19-05-2020-7');
-                res.body.should.have.property('userId');
-                res.body.userId.should.equal(2); // expects an obj
+                res.body.message.should.equal('habit submitted');
                 done();
             });
         });
@@ -132,26 +110,14 @@ describe('API routes', function() {
           chai.request(app)
           .put('/habitapi/addtime/1')
           .send({
-              complete: "{14-04-2020,06-05-2020,20-05-2020}"
+              complete: "[14-04-2020,06-05-2020,20-05-2020]"
           })
           .end(function(err, res) {
             res.should.have.status(200);
             res.should.be.json; // jshint ignore:line
             res.body.should.be.a('object');
-            res.body.should.have.property('habitName');
-            res.body.habitName.should.equal('Sleep');
-            res.body.should.have.property('frequency');
-            res.body.frequency.should.equal('1');
-            res.body.should.have.property('description');
-            res.body.description.should.equal('sleep well');
-            res.body.should.have.property('complete');
-            res.body.complete.should.equal('{14-04-2020,06-05-2020,20-05-2020}');
-            res.body.should.have.property('current_streak');
-            res.body.current_streak.should.equal('19-05-2020-7');
-            res.body.should.have.property('highest_streak');
-            res.body.highest_streak.should.equal('19-05-2020-7');
-            res.body.should.have.property('userId');
-            // res.body.userId.should.equal(2); // expects an obj
+            res.body.should.have.property('message');
+            res.body.message.should.equal('Completed updated');
             done();
             })   
         });
@@ -170,4 +136,173 @@ describe('API routes', function() {
             })
         })
     });
+
+    describe('PUT /habitapi/addStrike/:habitId', function() {
+        it('should update current streak and highest', function(done) {
+          chai.request(app)
+          .put('/habitapi/addStrike/1')
+          .send({
+              current_streak: "19-05-2020-7",
+              highest_streak: "19-05-2020-7"
+          })
+          .end(function(err, res) {
+            res.should.have.status(200);
+            res.should.be.json; // jshint ignore:line
+            res.body.should.be.a('object');
+            res.body.should.have.property('message');
+            res.body.message.should.equal('streaks updated!');
+            done();
+            })   
+        });
+        it('should not update if current_streak or highest_streak field not included in request', function(done) {
+            chai.request(app)
+            .put('/habitapi/addstrike/1')
+            .send({
+                frequency: "daily"
+            })
+            .end(function(err, res) {
+                res.should.have.status(422);
+                res.body.should.be.a('object');
+                res.body.should.property('error');
+                res.body.error.should.equal('You can only update current streak and highest strike column');
+                done();
+            })
+        })
+    });
+
+    describe('DELETE /habitapi/deleteapi', function(){
+        it('should delete habit', function(done) {
+            chai.request(app)
+            .delete('/habitapi/deletehabit')
+            .send({
+                habit_id: 1
+            })
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json; // jshint ignore:line
+                res.body.should.be.a('object');
+                res.body.should.have.property('message');
+                res.body.message.should.equal('Delete successful!');
+                done();
+            })
+        })
+    })
+
+
+    //user routes tests...
+
+    describe('POST /api/signup', function() {
+        it('should add a new user to database', function(done){
+            chai.request(app)
+            .post('/api/signup')
+            .send({
+                name: 'rosie',
+                surname: 'fatima',
+                username: 'rf',
+                password_digest: 'rosie'
+            })
+            .end(function(err, res){
+                res.should.have.status(201);
+                res.should.be.json; // jshint ignore:line
+                res.body.should.be.a('object');
+                res.body.should.have.property('message');
+                res.body.message.should.equal('Signup Complete!');
+                done();
+            })
+
+        })
+        it('should not accept existing username', function(done){
+            chai.request(app)
+            .post('/api/signup')
+            .send({
+                name: 'rosie',
+                surname: 'fatima',
+                username: 'Sport',
+                password_digest: 'rosie'
+            })
+            .end(function(err, res){
+                res.should.have.status(409);
+                res.should.be.json; // jshint ignore:line
+                res.body.should.be.a('object');
+                res.body.should.have.property('error');
+                res.body.error.should.equal('username already present');
+                done();
+            })
+
+        })
+    })
+
+    describe('POST /api/signin', function() {
+        // it('should sign user in to their user space', function(done){
+        //     chai.request(app)
+        //     .post('/api/signin')
+        //     .send({
+        //         username: 'Sport',
+        //         password_digest: 'Sport'
+        //     })
+        //     .end(function(err, res){
+        //         res.should.have.status(200);
+        //         res.should.be.json; // jshint ignore:line
+        //         res.body.should.be.a('object');
+        //         done();
+        //     })
+        // })
+        it('should not accept wrong password', function(done){
+            chai.request(app)
+            .post('/api/signin')
+            .send({
+                username: 'Sport',
+                password_digest: 'sportyspice'
+            })
+            .end(function(err, res){
+                res.should.have.status(404);
+                res.should.be.json; // jshint ignore:line
+                res.body.should.be.a('object');
+                res.body.should.have.property('message');
+                res.body.message.should.equal('either username and password did not mach');
+                done();
+            })
+
+        })
+    })
+
+    describe('PUT /api/username', function() {
+        it('should not be able to update id field', function(done){
+            chai.request(app)
+            .put('/api/Sport')
+            .send({
+                userId: 3
+            })
+            .end(function(err, res){
+                res.should.have.status(422);
+                res.should.be.json; // jshint ignore:line
+                res.body.should.be.a('object');
+                res.body.should.have.property('error');
+                res.body.error.should.equal('You cannot update username or id field');
+                done();
+            })
+
+        })
+    })
+
+    describe('DELETE /api/:username', function(){
+        it('should delete user', function(done) {
+            chai.request(app)
+            .delete('/api/Sport')
+            .send({
+                habit_id: 1
+            })
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json; // jshint ignore:line
+                res.body.should.be.a('object');
+                res.body.should.have.property('message');
+                res.body.message.should.equal('user deleted');
+                done();
+            })
+        })
+    })
+
+
+
 });

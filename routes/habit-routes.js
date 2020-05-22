@@ -25,12 +25,9 @@ router.get("/completed/:habitid", (req, res, next) => {
 router.post("/newhabit", (req, res, next) => {
   const habit = req.body;
   Habits.addHabit(habit)
-    .then((habit) => {
-      res.status(200).json(habit);
+    .then(() => {
+      res.status(200).json({message: 'habit submitted'});
     })
-    // .then((id) => {
-    //     return Habits.getUserHabits(id);
-    // })
     .catch((error) => {
       console.log(error);
       res.status(500).json({ message: "cannot post habits" });
@@ -41,8 +38,8 @@ router.put("/addtime/:habitId", (req, res, next) => {
   console.log(req.body);
   if (req.body.hasOwnProperty("complete")) {
     Habits.HabitCompleteUpdate(req.params.habitId, req.body.complete)
-      .then(function (habit) {
-        res.status(200).json(habit);
+      .then(function () {
+        res.status(200).json({ message: "Completed updated" });
       })
       .catch(function (error) {
         next(error);
@@ -56,19 +53,19 @@ router.put("/addtime/:habitId", (req, res, next) => {
 
 router.put("/addStrike/:habitId", (req, res, next) => {
   if (
-    req.body.hasOwnProperty("current_strike") ||
-    req.body.hasOwnProperty("highest_strike")
+    req.body.hasOwnProperty("current_streak") ||
+    req.body.hasOwnProperty("highest_streak")
   ) {
     Habits.HabitUpdate(req.params.habitId, req.body)
       .then(function () {
-        res.status(200).json({ message: "strikes updated!" });
+        res.status(200).json({ message: "streaks updated!" });
       })
       .catch(function (error) {
         next(error);
       });
   } else {
     return res.status(422).json({
-      error: "You can only update current strike and highest strike column",
+      error: "You can only update current streak and highest strike column",
     });
   }
 });
@@ -77,7 +74,10 @@ router.delete("/deletehabit", (req, res, next) => {
   const habitId = req.body.habit_id;
   console.log(req.body);
   Habits.deleteHabit(habitId)
-    .then(res.send("Delete successful!"))
+    .then(function(){
+      res.status(200).json({message: "Delete successful!"})
+    }
+      )
     .catch((error) => {
       console.log(error);
       res.status(500).json({ message: "cannot delete habits" });
