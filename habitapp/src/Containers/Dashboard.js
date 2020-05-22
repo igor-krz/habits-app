@@ -46,13 +46,62 @@ class Dashboard extends Component {
             </h3>
           </div>
           <div className="col-lg-7">
-            <div className="App-body">
+            <div className="App-body" id="habitCheckDiv">
               <HabitCheckForm user={user_id} date={date} />
             </div>
           </div>
           <div className="col-lg-3" id="asideArea">
-            <NewHabit user={user_id} date={date} />
-            <ViewHabit user={user_id} date={date} />
+            <div id="aside1">
+              <NewHabit user={user_id} date={date} />
+            </div>
+
+            <button
+              type="button"
+              className="btn btn-primary"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            >
+              View Completed Habits
+            </button>
+
+            <div
+              className="modal fade"
+              id="exampleModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog" role="document">
+                <div className="modal-content" id="viewHabit">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Completed Habit
+                    </h5>
+                    <button
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <ViewHabit user={user_id} date={date} />
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
