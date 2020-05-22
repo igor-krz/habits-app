@@ -6,7 +6,9 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Navigation from "./Components/Navigation";
 
 //containers
-import HomePage from "./Containers/HomePage";
+import RegisterPage from "./Containers/RegisterPage";
+import LoginPage from "./Containers/LoginPage";
+import Dashboard from "./Containers/Dashboard";
 
 class App extends React.Component {
   render() {
@@ -15,9 +17,11 @@ class App extends React.Component {
         <Router>
           <Navigation />
           <Switch>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
+            <Route exact path="/" component={LoginPage} />
+
+            <Route exact path="/register" component={RegisterPage} />
+
+            <Route exact path="/dashboard" component={Dashboard} />
           </Switch>
         </Router>
       </div>

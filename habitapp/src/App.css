@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  /* font-family: "Bebas Neue", cursive; */
+  font-family: "Righteous", cursive;
 }
 
 .App-logo {
@@ -35,4 +37,135 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#submitted {
+  display: none;
+}
+
+div#HomePage {
+  background-color: beige;
+}
+.App-body {
+  background-color: ghostwhite;
+  padding: 50px;
+  margin: 15px;
+}
+label {
+  font-size: 20px;
+  font-family: "Raleway", sans-serif;
+  color: cadetblue;
+}
+label.habitLabel {
+  width: 450px;
+  color: brown;
+  font-size: 30px;
+  font-weight: 600;
+}
+.todaysTask {
+  margin: 10px;
+  padding: 5px;
+  /* justify-content: center; */
+  float: center;
+  padding-left: 100px;
+}
+img.habitimage {
+  width: 70px;
+}
+
+span#drinks {
+  background-color: #61dafb;
+}
+span#activities {
+  background-color: #ff915a;
+}
+span#food {
+  background-color: #aef6c7;
+}
+span#lifestyle {
+  background-color: #cda6c6;
+}
+span#nature {
+  background-color: #f9d64c;
+}
+span#education {
+  background-color: #ba919b;
+}
+span#household {
+  background-color: #ffafa9;
+}
+span#sports {
+  background-color: #ddc9a9;
+}
+span#hygiene {
+  background-color: #fea7d8;
+}
+div#showHabit {
+  display: none;
+}
+div#habitDisplay {
+  display: block;
+}
+
+div#HomePage {
+  background-color: beige;
+  padding-top: 20px;
+}
+p {
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-size: 30px;
+  color: brown;
+  font-weight: 600;
+}
+button#navButton {
+  background-color: #e89a5a;
+  padding: 5px 10px 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: dimgrey;
+  font-size: x-large;
+}
+button.loginButton {
+  padding: 10px 15px 10px 15px;
+  margin-right: 25px;
+  background-color: #e89a5a;
+  border: none;
+  border-radius: 5px;
+  color: whitesmoke;
+  font-size: larger;
+}
+div#HomePage {
+  background-color: #579b7f;
+  padding-top: 20px;
+  min-height: 100vh;
+}
+div#formArea {
+  border-radius: 50px;
+  background-color: #99e3c4;
+  /* color: brown; */
+}
+nav#navigation {
+  background-color: #91e5c9;
+}
+div#habitCheckDiv {
+  background-color: #f0aa60;
+}
+img.habitimage1 {
+  width: 50px;
+}
+div#viewHabit {
+  width: 800px;
+}
+span.input-group-text {
+  width: 250px;
+  height: 100px;
+}
+div#aside1 {
+  margin: 10px;
+}
+button.btn.btn-primary.btn-lg.btn-block {
+  background-color: #e97929;
+  border: none;
+  padding: 10px;
 }
