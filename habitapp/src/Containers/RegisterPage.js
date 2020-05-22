@@ -23,8 +23,8 @@ class RegisterPage extends Component {
   };
   handleSubmit = (e) => {
     if (this.state.password === this.state.repassword) {
-      if (this.state.password.length < 8) {
-        alert("the password must be 8 character long");
+      if (this.state.password.length < 6 || this.state.password.length > 10) {
+        alert("the password must be between 6 - 10 character");
       } else {
         const data = {
           name: this.state.name,
@@ -133,6 +133,7 @@ class RegisterPage extends Component {
                 <button
                   type="submit"
                   className="btn btn-primary btn-lg btn-block"
+                  id="signUpbutton"
                 >
                   Sign up
                 </button>

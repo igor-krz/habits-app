@@ -8,26 +8,26 @@ class Habit extends Component {
       complete: false,
     };
   }
-
-  handleDelete = (event) => {
+  handleDelete(event) {
     const habitID = this.props.id;
-
-    fetch("habitapi/deletehabit", {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        habit_id: habitID,
-      }),
-    })
-      .then((response) => {
-        response.json();
-        console.log(response);
+    if (window.confirm("Are you sure you want to delete it forever") === true) {
+      fetch("habitapi/deletehabit", {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          habit_id: habitID,
+        }),
       })
-      .then(this.refreshPage);
-  };
+        .then((response) => {
+          response.json();
+          console.log(response);
+        })
+        .then(this.refreshPage());
+    }
+  }
 
   refreshPage = () => {
     window.location.reload(false);
@@ -78,14 +78,14 @@ class Habit extends Component {
               id={this.state.submitHabit}
               onClick={this.handleSubmit}
             >
-              ✔
+              <img src="ok.png" alt="Avatar" className="habitimage1" />
             </button>
             <button
               onClick={this.handleDelete.bind(this, this.props.id)}
               className="btn btn-outline-danger"
               type="button"
             >
-              ❌
+              <img src="trash.png" alt="Avatar" className="habitimage1" />
             </button>
           </div>
         </div>

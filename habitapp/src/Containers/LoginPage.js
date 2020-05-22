@@ -40,7 +40,7 @@ class LoginPage extends Component {
       .catch((error) => {
         console.log("error: " + error);
         console.log("user not found");
-        alert("wrong username and password");
+        window.alert("wrong username and password");
         this.setState({ requestFailed: true });
       });
     e.preventDefault();
@@ -59,11 +59,11 @@ class LoginPage extends Component {
       );
     }
     return (
-      <div  className="container-fluid" id="HomePage">
+      <div className="container-fluid" id="HomePage">
         <div className="row">
           <div className="col-lg-3" id="asideArea"></div>
           <div className="col-lg-6">
-            <div className="App-body">
+            <div className="App-body" id="formArea">
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group row">
                   <label htmlFor="username">Username</label>
@@ -89,11 +89,11 @@ class LoginPage extends Component {
                     autoComplete="on"
                   />
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="loginButton">
                   Login
                 </button>
                 <Link to="/register">
-                  <button type="button" className="btn btn-primary">
+                  <button type="button" className="loginButton">
                     Sign up
                   </button>
                 </Link>

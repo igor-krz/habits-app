@@ -26,11 +26,11 @@ class ViewHabit extends Component {
   render() {
     return (
       <div>
-        {this.state.habitData !== "drinks" ? (
+        {this.state.habitData ? (
           this.state.habitData.map((object) => (
             <div key={object}>
               {object.habitName}
-              {object.description}
+              <button>Lifestyle</button>
               <br />
               <Streak
                 habit={object.habit_id}

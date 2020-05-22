@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  /* font-family: "Bebas Neue", cursive; */
+  font-family: "Righteous", cursive;
 }
 
 .App-logo {
@@ -51,7 +53,7 @@ div#HomePage {
 }
 label {
   font-size: 20px;
-  font-family: cursive;
+  font-family: "Raleway", sans-serif;
   color: cadetblue;
 }
 label.habitLabel {
@@ -102,19 +104,45 @@ div#showHabit {
 div#habitDisplay {
   display: block;
 }
-.navigation {
-  /* margin: 10px; */
-  background-color: aliceblue;
-  padding: 10px;
-}
+
 div#HomePage {
   background-color: beige;
   padding-top: 20px;
 }
 p {
   text-align: center;
-  font-family: cursive;
+  font-family: "Raleway", sans-serif;
   font-size: 30px;
   color: brown;
   font-weight: 600;
+}
+button#navButton {
+  background-color: #e89a5a;
+  padding: 5px 10px 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: dimgrey;
+  font-size: x-large;
+}
+button.loginButton {
+  padding: 10px 15px 10px 15px;
+  margin-right: 25px;
+  background-color: #e89a5a;
+  border: none;
+  border-radius: 5px;
+  color: whitesmoke;
+  font-size: larger;
+}
+div#HomePage {
+  background-color: #579b7f;
+  padding-top: 20px;
+  min-height: 100vh;
+}
+div#formArea {
+  border-radius: 50px;
+  background-color: #99e3c4;
+  /* color: brown; */
+}
+nav#navigation {
+  background-color: #91e5c9;
 }
