@@ -24,22 +24,37 @@ class ViewHabit extends Component {
     return parseInt(split[3]);
   };
   render() {
+    const logo = this.props.description;
+    const logo1 = logo + ".png";
     return (
-      <div>
+      <div id="viewHabits">
         {this.state.habitData ? (
           this.state.habitData.map((object) => (
             <div key={object}>
-              {object.habitName}
-              <button>Lifestyle</button>
-              <br />
-              <Streak
-                habit={object.habit_id}
-                date={this.props.date}
-                complete={object.complete}
-                current_streak={this.getStreak(object.current_streak)}
-                highest_streak={this.getStreak(object.highest_streak)}
-                frequency={object.frequency}
-              />
+              <div className="input-group" id="viewHabits">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <label>{object.description}</label>
+                  </span>
+                  <span className="input-group-text">
+                    <label htmlFor={object.habitName} className="habitLabel">
+                      {object.habitName}
+                    </label>
+                  </span>
+                  <span className="input-group-text">
+                    <label>
+                      <Streak
+                        habit={object.habit_id}
+                        date={this.props.date}
+                        complete={object.complete}
+                        current_streak={this.getStreak(object.current_streak)}
+                        highest_streak={this.getStreak(object.highest_streak)}
+                        frequency={object.frequency}
+                      />
+                    </label>
+                  </span>
+                </div>
+              </div>
             </div>
           ))
         ) : (
