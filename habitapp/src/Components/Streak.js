@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ViewHabit from "./ViewHabit";
 
+
+
 class Streak extends Component {
   constructor(props) {
     super(props);
@@ -10,93 +12,113 @@ class Streak extends Component {
     };
   }
   componentDidMount() {
-    const currentstreakArray = this.props.current_streak.split("-");
-    const highestStreak = this.props.highest_streak.split("-");
-    console.log("this is being dislayed");
-    console.log(currentstreakArray[3]);
-    console.log(typeof currentstreakArray);
     this.setState(
       {
-        currentStreak: parseInt(currentstreakArray[3]),
-        highestStreak: parseInt(highestStreak[3]),
-      },
-      () => this.checkStreak()
+        currentStreak: parseInt(this.props.current_streak),
+        highestStreak: parseInt(this.props.highest_streak)
+  
+      },() => this.sendStreak()
+      // () => this.checkStreak()
     );
   }
 
+  increment = () => {
+    this.setState({
+      currentStreak: this.state.currentStreak + 1
+    },() =>  { 
+      if (this.state.currentStreak > this.props.highest_streak) {
+      this.higher()}
+    })
+  }
+
+  higher = () => {
+    this.setState({
+      highestStreak: this.state.currentStreak
+    })}
+
+ async sendStreak () {
+ await this.checkStreak()
+   this.submitStreak()
+}
+  
   checkStreak = () => {
     if (this.props.complete.length > 0) {
       const latestDate = this.props.complete[this.props.complete.length - 1];
       const lastDate = new Date(latestDate.split("-").reverse().join("/"));
       const now = new Date(this.props.date.split("-").reverse().join("/"));
       const one_day = 1000 * 60 * 60 * 24;
-      const diff = Math.ceil((lastDate.getTime() - now.getTime()) / one_day);
-      if (this.props.frequency === "daily" && diff === 1) {
-        this.setState(
-          {
-            currentStreak: this.state.current_streak + 1,
-          },
-          () => {
-            if (this.state.currentStreak > this.props.highest_streak) {
-              this.props.highest_streak = this.state.currentStreak;
-            } else {
-              console.log("not highest");
-            }
-          }
-        );
-      }
-      if (this.props.frequency === "weekly" && diff === 7) {
-        this.setState(
-          {
-            currentStreak: this.state.current_streak + 1,
-          },
-          () => {
-            if (this.state.currentStreak > this.props.highest_streak) {
-              this.props.highest_streak = this.state.currentStreak;
-            } else {
-              console.log("not highest");
-            }
-          }
-        );
-      }
-      if (this.props.frequency === "monthly" && diff === 30) {
-        this.setState(
-          {
-            currentStreak: this.state.current_streak + 1,
-          },
-          () => {
-            if (this.state.currentStreak > this.props.highest_streak) {
-              this.props.highest_streak = this.state.currentStreak;
-            } else {
-              console.log("not highest");
-            }
-          }
-        );
-      }
-      if (
-        (this.props.frequency === "daily" && diff !== 1) ||
-        (this.props.frequency === "weekly" && diff !== 7) ||
-        (this.props.frequency === "monthly" && diff !== 30)
-      ) {
+      const diff = Math.ceil((now.getTime() - lastDate.getTime()) / one_day);
+      console.log(diff)
+
+      if((this.props.frequency === "daily" && diff === 1) || (this.props.frequency === "weekly" && diff === 7) || (this.props.frequency === "monthly" && diff === 30) ) {
+        this.increment()
+      } else {
         this.setState({
           currentStreak: 0,
-        });
+        },
+         () => this.submitStreak()
+        );
       }
-    } else {
-      console.log("no completed data");
-    }
+      // if (this.props.frequency === "daily" && diff === 1) {
+      //         this.increment()
+      // }
+      // if (this.props.frequency === "weekly" && diff === 7) {
+      //         this.increment()}
+      // if (this.props.frequency === "monthly" && diff === 30) {
+      //           this.increment()
+      //     }
+    
+  //     if (
+  //       (this.props.frequency === "daily" && diff !== 1) ||
+  //       (this.props.frequency === "weekly" && diff !== 7) ||
+  //       (this.props.frequency === "monthly" && diff !== 30)
+  //     ) {
+  //       this.setState({
+  //         currentStreak: 0,
+  //       });
+  //     }
+  //   } else {
+  //     console.log("no completed data");
+      }
+   };
+
+
+
+  submitStreak = () => {
+     const CurrentStreak = this.props.date + '-' + this.state.currentStreak;
+     const HighestStreak = this.props.date +  '-' + this.state.highestStreak;
+
+    const data = {
+      current_streak: CurrentStreak,
+      highest_streak: HighestStreak
+    };
+
+    fetch("/habitapi/addStrike/"+this.props.habit, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify(data),
+    })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+    
+
   };
 
+
   render() {
+    // this.sendStreak()
     return (
-      <div>
+      <div className='Streak'>
         {this.props.complete ? (
           <div>
             {/* <ViewHabit current={this.state.currentStreak}
               highest= {this.state.highestStreak} /> */}
 
-            <h1>current : {this.state.currentStreak}</h1>
-            <h1>highest : {this.state.highestStreak}</h1>
+            <h3>current streak: {this.state.currentStreak}</h3>
+            <h3>highest streak: {this.state.highestStreak}</h3>
           </div>
         ) : (
           <div>
