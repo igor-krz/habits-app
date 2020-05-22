@@ -23,6 +23,15 @@ class ViewHabit extends Component {
     let split = string.split("-");
     return parseInt(split[3]);
   };
+
+  getStreakDate = (string) => {
+    let split = string.split("-");
+    let day = parseInt(split[0])
+    let month = parseInt(split[1])
+    let year = parseInt(split[2])
+    return day+ '-' + month + '-' + year
+
+  }
   render() {
     const logo = this.props.description;
     const logo1 = logo + ".png";
@@ -47,6 +56,8 @@ class ViewHabit extends Component {
                         habit={object.habit_id}
                         date={this.props.date}
                         complete={object.complete}
+                        current_streakDate={this.getStreakDate(object.current_streak)}
+                        highest_streakDate={this.getStreakDate(object.current_streak)}
                         current_streak={this.getStreak(object.current_streak)}
                         highest_streak={this.getStreak(object.highest_streak)}
                         frequency={object.frequency}

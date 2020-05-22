@@ -83,7 +83,7 @@ class HabitCheckForm extends Component {
         ) : (
           <div>
             {" "}
-            <h1>No Habits to complete</h1>{" "}
+            <h1>Yuppy No habits to complete</h1>{" "}
           </div>
         )}
       </div>

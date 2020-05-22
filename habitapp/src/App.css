@@ -161,3 +161,11 @@ span.input-group-text {
   width: 250px;
   height: 100px;
 }
+div#aside1 {
+  margin: 10px;
+}
+button.btn.btn-primary.btn-lg.btn-block {
+  background-color: #e97929;
+  border: none;
+  padding: 10px;
+}

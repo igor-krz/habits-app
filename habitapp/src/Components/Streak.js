@@ -45,7 +45,7 @@ class Streak extends Component {
   }
 
   checkStreak = () => {
-    if (this.props.complete.length > 0) {
+    if ((this.props.complete.length > 0 && this.props.current_streakDate !== this.props.date) || (this.props.complete.length > 0 && this.props.current_streakDate === this.props.date && this.props.current_streak === '0')  ) {
       const latestDate = this.props.complete[this.props.complete.length - 1];
       const lastDate = new Date(latestDate.split("-").reverse().join("/"));
       const now = new Date(this.props.date.split("-").reverse().join("/"));

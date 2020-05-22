@@ -26,6 +26,12 @@ export class NewHabit extends Component {
       description: this.state.habitDes,
       frequency: this.state.frequency,
       userId: this.props.user,
+
+      //try this to check streak--
+      //current_streak: '21-5-2020-3',
+      // and the complete is : ['21-5-2020]
+      //then add habit, with frequency daily, then check as completed. 
+      //reachange the data to before. the current streak should increase to 4, the higher should be 4 and after refresh shouldn't chage :D
       current_streak: `${this.props.date}-0`,
       highest_streak: `${this.props.date}-0`,
       complete: [],
@@ -51,7 +57,7 @@ export class NewHabit extends Component {
       <div>
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-primary btn-lg btn-block"
           data-toggle="modal"
           data-target=".bd-example-modal-lg"
         >
