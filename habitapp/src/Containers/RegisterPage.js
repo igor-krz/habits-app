@@ -107,6 +107,9 @@ class RegisterPage extends Component {
                     autoComplete="on"
                     required
                   />
+                  <small id="emailHelp" className="form-text text-muted">
+                    Password should be between 6 - 10 character
+                  </small>
                 </div>
                 <div className="form-group">
                   <label htmlFor="re-password">Confirm Password</label>
@@ -119,8 +122,14 @@ class RegisterPage extends Component {
                     autoComplete="on"
                     required
                   />
+                  <small id="emailHelp" className="form-text text-muted">
+                    Password should be between 6 - 10 character
+                  </small>
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-lg btn-block"
+                >
                   Sign up
                 </button>
               </form>

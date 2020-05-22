@@ -50,14 +50,71 @@ div#HomePage {
   margin: 15px;
 }
 label {
+  font-size: 20px;
+  font-family: cursive;
+  color: cadetblue;
+}
+label.habitLabel {
   width: 500px;
-  text-align: center;
-  font-size: 15px;
-  /* padding: 5px; */
-  /* margin: 5px; */
+  color: brown;
+  font-size: 30px;
+  font-weight: 600;
 }
 .todaysTask {
   margin: 10px;
   padding: 5px;
   /* justify-content: center; */
+}
+img.habitimage {
+  width: 70px;
+}
+
+span#drinks {
+  background-color: #61dafb;
+}
+span#activities {
+  background-color: #ff915a;
+}
+span#food {
+  background-color: #aef6c7;
+}
+span#lifestyle {
+  background-color: #cda6c6;
+}
+span#nature {
+  background-color: #f9d64c;
+}
+span#education {
+  background-color: #ba919b;
+}
+span#household {
+  background-color: #ffafa9;
+}
+span#sports {
+  background-color: #ddc9a9;
+}
+span#hygiene {
+  background-color: #fea7d8;
+}
+div#showHabit {
+  display: none;
+}
+div#habitDisplay {
+  display: block;
+}
+.navigation {
+  /* margin: 10px; */
+  background-color: aliceblue;
+  padding: 10px;
+}
+div#HomePage {
+  background-color: beige;
+  padding-top: 20px;
+}
+p {
+  text-align: center;
+  font-family: cursive;
+  font-size: 30px;
+  color: brown;
+  font-weight: 600;
 }

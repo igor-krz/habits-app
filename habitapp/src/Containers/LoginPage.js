@@ -46,6 +46,7 @@ class LoginPage extends Component {
     e.preventDefault();
     // this.props.loadFunction(this.state);
   };
+
   render() {
     if (this.state.toDashboard === true) {
       return (
@@ -64,7 +65,7 @@ class LoginPage extends Component {
           <div className="col-lg-6">
             <div className="App-body">
               <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
+                <div className="form-group row">
                   <label htmlFor="username">Username</label>
                   <input
                     type="text"
@@ -76,13 +77,12 @@ class LoginPage extends Component {
                     required
                   />
                 </div>
-                <div className="form-group">
+                <div className="form-group row">
                   <label htmlFor="password">Password</label>
                   <input
                     type="password"
                     className="form-control"
                     id="password"
-                    placeholder="Password"
                     name="password"
                     value={this.state.password}
                     onChange={this.handlePassword}
@@ -92,9 +92,11 @@ class LoginPage extends Component {
                 <button type="submit" className="btn btn-primary">
                   Login
                 </button>
-                <button type="button" className="btn btn-outline-dark">
-                  <Link to="/register">Sign Up</Link>
-                </button>
+                <Link to="/register">
+                  <button type="button" className="btn btn-primary">
+                    Sign up
+                  </button>
+                </Link>
               </form>
             </div>
           </div>

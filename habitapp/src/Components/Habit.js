@@ -56,13 +56,17 @@ class Habit extends Component {
   };
 
   render() {
-    console.log(this.props.frequency);
+    const logo = this.props.description;
+    const logo1 = logo + ".png";
     return (
       <div className="todaysTask">
         <div className="input-group">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="basic-addon3">
-              <label htmlFor={this.props.name}>{this.props.name}</label>
+            <span className="input-group-text" id={logo}>
+              <img src={logo1} alt="Avatar" className="habitimage" />
+              <label htmlFor={this.props.name} className="habitLabel">
+                {this.props.name}
+              </label>
             </span>
           </div>
           <div className="input-group-append">

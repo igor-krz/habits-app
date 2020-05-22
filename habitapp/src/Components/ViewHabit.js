@@ -6,7 +6,7 @@ class ViewHabit extends Component {
     super(props);
     this.state = {
       habitData: [],
-      complete: false,
+      displayHabit: "",
     };
   }
   componentDidMount() {
@@ -17,17 +17,23 @@ class ViewHabit extends Component {
         this.setState({ habitData: data });
       });
   }
+  handleShowhabit = (e) => {
+    e.preventDefault();
+    this.setState({ displayHabit: "habitDisplay" });
+  };
   render() {
     return (
       <div>
         {this.state.habitData ? (
           this.state.habitData.map((object) => (
             <div key={object}>
-              {object.habitName}
+              <button onClick={this.handleShowhabit}>
+                {object.description}
+              </button>
+              <div id={this.state.displayHabit}>{object.name}</div>
+
               <br />
-              {object.frequency}
-              <br />
-              {object.complete}{" "}
+
               <Streak
                 date={this.props.date}
                 complete={object.complete}

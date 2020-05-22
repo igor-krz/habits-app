@@ -94,9 +94,8 @@ class Streak extends Component {
           <div>
             {/* <ViewHabit current={this.state.currentStreak}
               highest= {this.state.highestStreak} /> */}
-
-            <h1>current : {this.state.currentStreak}</h1>
-            <h1>highest : {this.state.highestStreak}</h1>
+            current : {this.state.currentStreak}
+            highest : {this.state.highestStreak}
           </div>
         ) : (
           <div>

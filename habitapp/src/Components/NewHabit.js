@@ -108,13 +108,29 @@ export class NewHabit extends Component {
                       Description
                     </label>
                     <div className="col-sm-10">
-                      <input
+                      {/* <input
                         type="text"
                         className="form-control"
                         id="habitDes"
                         value={this.state.habitDes}
                         onChange={this.handleHabitdes}
-                      />
+                      /> */}
+                      <select
+                        className="form-control"
+                        id="exampleFormControlSelect2"
+                        value={this.state.habitDes}
+                        onChange={this.handleHabitdes}
+                      >
+                        <option value="food">Food</option>
+                        <option value="drinks">Drinks</option>
+                        <option value="activities">Activities</option>
+                        <option value="lifestyle">Lifestyle</option>
+                        <option value="sports">Sports</option>
+                        <option value="education">Education</option>
+                        <option value="hygiene">Hygiene</option>
+                        <option value="nature">Nature</option>
+                        <option value="household">Household</option>
+                      </select>
                     </div>
                   </div>
                   {/* <div className="form-group row">

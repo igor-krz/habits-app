@@ -68,11 +68,14 @@ class HabitCheckForm extends Component {
     console.log(toComplete);
     return (
       <div>
+        <p>Today's Goal</p>
+        <br />
         {this.state.toComplete.length > 0 ? (
           this.state.toComplete.map((object) => (
             <Habit
               date={this.props.date}
               id={object.habit_id}
+              description={object.description}
               complete={object.complete}
               name={object.habitName}
               current_streak={object.current_streak}
