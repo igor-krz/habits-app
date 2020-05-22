@@ -57,7 +57,7 @@ label {
   color: cadetblue;
 }
 label.habitLabel {
-  width: 500px;
+  width: 450px;
   color: brown;
   font-size: 30px;
   font-weight: 600;
@@ -66,6 +66,8 @@ label.habitLabel {
   margin: 10px;
   padding: 5px;
   /* justify-content: center; */
+  float: center;
+  padding-left: 200px;
 }
 img.habitimage {
   width: 70px;
@@ -145,4 +147,17 @@ div#formArea {
 }
 nav#navigation {
   background-color: #91e5c9;
+}
+div#habitCheckDiv {
+  background-color: #f0aa60;
+}
+img.habitimage1 {
+  width: 50px;
+}
+div#viewHabit {
+  width: 800px;
+}
+span.input-group-text {
+  width: 250px;
+  height: 100px;
 }

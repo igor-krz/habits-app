@@ -45,10 +45,6 @@ function getSingle(username) {
   return Users().where("username", username).first();
 }
 
-function getUsernames() {
-  return knex.select("username").from("userTable");
-}
-
 function add(user) {
   return Users().insert(user, "user_id");
 }
@@ -103,7 +99,6 @@ module.exports = {
   createToken: createToken,
   checkPassword: checkPassword,
   updateUserToken: updateUserToken,
-  getUsernames: getUsernames,
   getUserHabits: getUserHabits,
   addHabit: addHabit,
   deleteHabit: deleteHabit,

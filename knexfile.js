@@ -6,11 +6,7 @@ module.exports = {
       host: "localhost",
       user: process.env.DB_USER,
       password: process.env.DB_PASS,
-
-
-      database: "habitdb_test",
-
-
+      database: "habitdb_test"
     },
     migrations: {
       directory: __dirname + "/habitdb/migrations",

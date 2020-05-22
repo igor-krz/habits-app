@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Habit from "./Habit";
-
 let toComplete = [];
 class HabitCheckForm extends Component {
   constructor(props) {
@@ -24,7 +23,6 @@ class HabitCheckForm extends Component {
       );
     // this.ToComplete();
   }
-
   async ToComplete() {
     if (this.state.habits.length > 0) {
       await this.checkComplete();
@@ -35,7 +33,6 @@ class HabitCheckForm extends Component {
       console.log("no habits");
     }
   }
-
   checkComplete = () => {
     this.state.habits.map((object) => {
       const todaysDate = this.props.date;
@@ -63,7 +60,6 @@ class HabitCheckForm extends Component {
       }
     });
   };
-
   render() {
     console.log(toComplete);
     return (
@@ -94,5 +90,4 @@ class HabitCheckForm extends Component {
     );
   }
 }
-
 export default HabitCheckForm;

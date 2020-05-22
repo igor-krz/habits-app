@@ -2,17 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Users = require("../habitdb/queries");
 
-router.get("/usernames", (req, res, next) => {
-  let usernames = Users.getUsernames();
-  console.log(usernames);
-  res.send(usernames);
-});
 router.post("/signup", (req, res, next) => {
   const user = req.body;
   const username = req.body.username;
   Users.getSingle(username).then((found) => {
     if (found) {
-      res.status(409).json({ message: "username already present" });
+      res.status(409).json({ error: "username already present" });
     } else {
       Users.hashPassword(user.password_digest)
         .then((hashedPassword) => {
@@ -50,11 +45,11 @@ router.post("/signin", (req, res, next) => {
       };
       res.status(200).json({ userInfo });
     })
-    .catch((err) => res.status(404).json({ message: "user not found" }));
+    .catch((err) => res.status(404).json({ message: "either username and password did not mach" }));
 });
 
 router.put("/:username", (req, res, next) => {
-  if (req.body.hasOwnProperty("username") || req.body.hasOwnProperty("id")) {
+  if (req.body.hasOwnProperty("username") || req.body.hasOwnProperty("userId")) {
     return res.status(422).json({
       error: "You cannot update username or id field",
     });
@@ -76,7 +71,7 @@ router.delete("/:username", (req, res, next) => {
     .then(function (showUser) {
       Users.remove(req.params.username)
         .then(function () {
-          res.status(200).json(showUser);
+          res.status(200).json({message: "user deleted"});
         })
         .catch(function () {
           next(error);
