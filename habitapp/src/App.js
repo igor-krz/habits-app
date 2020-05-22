@@ -10,8 +10,6 @@ import RegisterPage from "./Containers/RegisterPage";
 import LoginPage from "./Containers/LoginPage";
 import Dashboard from "./Containers/Dashboard";
 
-import HabitForm from "./Components/HabitForm";
-
 class App extends React.Component {
   render() {
     return (
@@ -20,7 +18,6 @@ class App extends React.Component {
           <Navigation />
           <Switch>
             <Route exact path="/" component={LoginPage} />
-            {/* <Route exact path="/habit" component={ListHabit} /> */}
 
             <Route exact path="/register" component={RegisterPage} />
 

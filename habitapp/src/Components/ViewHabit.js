@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import Streak from "./Streak";
+
 class ViewHabit extends Component {
   constructor(props) {
     super(props);
@@ -17,24 +18,26 @@ class ViewHabit extends Component {
         this.setState({ habitData: data });
       });
   }
-  handleShowhabit = (e) => {
-    e.preventDefault();
-    this.setState({ displayHabit: "habitDisplay" });
+
+  getStreak = (string) => {
+    let split = string.split("-");
+    return parseInt(split[3]);
   };
   render() {
     return (
       <div>
-        {this.state.habitData.description !== "drinks" ? (
+        {this.state.habitData !== "drinks" ? (
           this.state.habitData.map((object) => (
             <div key={object}>
               {object.habitName}
               {object.description}
               <br />
               <Streak
+                habit={object.habit_id}
                 date={this.props.date}
                 complete={object.complete}
-                current_streak={object.current_streak}
-                highest_streak={object.highest_streak}
+                current_streak={this.getStreak(object.current_streak)}
+                highest_streak={this.getStreak(object.highest_streak)}
                 frequency={object.frequency}
               />
             </div>
