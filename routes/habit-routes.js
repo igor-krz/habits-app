@@ -41,8 +41,8 @@ router.put("/addtime/:habitId", (req, res, next) => {
   console.log(req.body);
   if (req.body.hasOwnProperty("complete")) {
     Habits.HabitCompleteUpdate(req.params.habitId, req.body.complete)
-      .then(function () {
-        res.status(200).json({ message: "date sent!" });
+      .then(function (habit) {
+        res.status(200).json(habit);
       })
       .catch(function (error) {
         next(error);

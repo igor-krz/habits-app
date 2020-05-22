@@ -2,11 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Users = require("../habitdb/queries");
 
-router.get("/usernames", (req, res, next) => {
-  let usernames = Users.getUsernames();
-  console.log(usernames);
-  res.send(usernames);
-});
 router.post("/signup", (req, res, next) => {
   const user = req.body;
   const username = req.body.username;
