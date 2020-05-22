@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Habit from "./Habit";
+import ViewHabit from "./ViewHabit";
 let toComplete = [];
 class HabitCheckForm extends Component {
   constructor(props) {
